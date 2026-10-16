@@ -63,3 +63,10 @@ and Chrome Web Store publisher 2FA remain manual acceptance gates in docs/ACCEPT
 CI unit checks on Windows are useful but do not constitute native Windows capture testing.
 Browser download observation stalled, so native TXT/SRT/VTT download completion remains a manual check; generated caption content and formatting passed module tests.
 The extension has not been submitted to the Chrome Web Store.
+
+## 0.2.1 Hebrew-only interface
+
+- `npm test` passed locally: microphone permission/recovery, tab audio, insertion, captions, drafts, and streaming-file safeguards.
+- Added regression coverage for fixed Hebrew/RTL despite a saved English preference, absence of the language selector, Hebrew word counts, and Hebrew microphone success/blocked states.
+- Main recorder and microphone setup HTML are Hebrew/RTL before JavaScript runs. Chrome-owned permission dialogs follow the browser’s own language.
+- This UI-only update does not resolve the manual installed-Chrome acceptance gates documented above.

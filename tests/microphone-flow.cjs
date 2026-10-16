@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '../extension');
 const tick = () => new Promise((resolve) => setImmediate(resolve));
 async function drain() { for (let i = 0; i < 8; i++) await tick(); }
-function environment({ page = 'panel', permission = 'prompt', micError, session = '', accepted = true, permissionQueryFails = false } = {}) {
+function environment({ page = 'panel', permission = 'prompt', micError, session = '', accepted = true, permissionQueryFails = false, storedLanguage = 'en' } = {}) {
   const elements = new Map();
   const html = fs.readFileSync(path.join(root, `${page}.html`), 'utf8');
   for (const match of html.matchAll(/\bid="([^"]+)"/g)) {
@@ -41,13 +41,13 @@ function environment({ page = 'panel', permission = 'prompt', micError, session 
       create: async (options) => { calls.tabs.push(options); return { id: 99, windowId: options.windowId || 10 }; } },
     sidePanel: { open: async () => {} },
   };
-  const cache = new Map();
+  const cache = new Map([['ui-language', storedLanguage]]);
   const globals = {
     AbortController, Blob,
     localStorage:{getItem:key=>cache.get(key)||null,setItem:(key,value)=>cache.set(key,value),removeItem:key=>cache.delete(key)},
     console, URL, URLSearchParams, crypto: { randomUUID: () => 'test-session' }, performance,
     setTimeout, clearTimeout, queueMicrotask, setInterval: () => 1, clearInterval() {},
-    document: { body: { className: '', classList: { toggle() {}, remove() {} } }, getElementById: (id) => {
+    document: { documentElement: {}, body: { className: '', classList: { toggle() {}, remove() {} } }, getElementById: (id) => {
       assert(elements.has(id), `Script refers to missing HTML element ${id}`); return elements.get(id);
     } },
     navigator: { platform: 'MacIntel', permissions: { query: async () => {
@@ -79,7 +79,17 @@ module.exports = { environment, drain };
 
 if (require.main === module) (async () => {
   const first = environment(); await first.ready();
-  assert.equal(first.elements.get('record-label').textContent, 'Enable microphone');
+  assert.equal(first.context.document.documentElement.lang, 'he');
+  assert.equal(first.context.document.documentElement.dir, 'rtl');
+  assert(!first.elements.has('ui-language'), 'No language selector is present');
+  const savedHebrew = environment({storedLanguage:'he'}); await savedHebrew.ready();
+  assert.equal(first.elements.get('status').textContent, savedHebrew.elements.get('status').textContent, 'Legacy language preferences never change the Hebrew interface');
+  assert.equal(first.context.IvritI18n.setLanguage, undefined);
+  assert.equal(first.context.IvritI18n.t('Recognition failed. Could not start recognition.'), 'זיהוי הדיבור נכשל. לא ניתן להתחיל את זיהוי הדיבור.');
+  first.elements.get('transcript').value='שלום עולם'; first.elements.get('transcript').events.input();
+  assert.equal(first.elements.get('word-count').textContent, '2 מילים');
+  console.log('PASS: Hebrew-only interface ignores saved English preferences, has no language switch, and uses RTL and Hebrew counts');
+  assert.equal(first.elements.get('record-label').textContent, 'הפעלת מיקרופון');
   await first.click('record');
   assert.equal(first.calls.windows.length, 1);
   assert.equal(first.calls.windows[0].type, 'popup');
@@ -92,7 +102,7 @@ if (require.main === module) (async () => {
   assert.equal(first.calls.audio, 0, 'Untrusted page cannot trigger recording');
   assert.equal(first.message({ type: 'ivrit-microphone-ready', session: 'test-session' }).accepted, true);
   await drain();
-  assert.equal(first.calls.audio, 1); assert.equal(first.elements.get('record-label').textContent, 'Stop recording');
+  assert.equal(first.calls.audio, 1); assert.equal(first.elements.get('record-label').textContent, 'עצירת הקלטה');
   await first.click('record'); assert.equal(first.calls.tracksStopped, 1, 'Stopping releases microphone');
   console.log('PASS: first-use popup, duplicate suppression, trusted approval, automatic recording, Stop');
 
@@ -118,6 +128,7 @@ if (require.main === module) (async () => {
   console.log('PASS: failed recording after approval offers recovery without a popup loop');
 
   const helper = environment({ page: 'microphone', session: '?request=1&session=test-session&returnWindow=10' }); await drain();
+  assert.equal(helper.elements.get('permission-title').textContent, 'המיקרופון מוכן');
   assert.equal(helper.calls.audio, 1); assert.equal(helper.calls.tracksStopped, 1);
   assert.equal(helper.calls.messages[0].type, 'track-stopped');
   assert.equal(helper.calls.messages[1].type, 'ivrit-microphone-ready');
@@ -130,7 +141,7 @@ if (require.main === module) (async () => {
   console.log('PASS: closed recorder leaves a usable success screen; manual setup never requests access on page load');
 
   const blocked = environment({ page: 'microphone', permission: 'denied', micError: denied(), session: '?request=1&session=x&returnWindow=10' }); await drain();
-  assert.equal(blocked.elements.get('permission-card').dataset.state, 'blocked'); assert.equal(blocked.elements.get('settings').hidden, false);
+  assert.equal(blocked.elements.get('permission-card').dataset.state, 'blocked'); assert.equal(blocked.elements.get('permission-title').textContent, 'הגישה למיקרופון חסומה'); assert.equal(blocked.elements.get('enable').textContent, 'ניסיון נוסף'); assert.equal(blocked.elements.get('settings').hidden, false);
   await blocked.click('settings'); assert.equal(blocked.calls.tabs[0].url, 'chrome://settings/content/microphone');
   assert.equal(blocked.calls.tabs[0].windowId, 10); assert.equal(blocked.calls.removed.length, 0);
   const system = environment({ page: 'microphone', micError: denied('Permission denied by system'), session: '?request=1&session=x' }); await drain();

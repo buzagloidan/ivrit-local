@@ -1,3 +1,4 @@
+const t = (text) => IvritI18n.t(text);
 const controls = Object.fromEntries(['permission-card','permission-step','permission-title','message','resume-hint','enable','settings','return','system-help','system-instructions','cancel'].map((id) => [id, document.getElementById(id)]));
 const query = new URLSearchParams(location.search);
 const isExtension = Boolean(globalThis.chrome?.runtime?.id);
@@ -7,10 +8,10 @@ let pending = false, enabled = false;
 
 function show(kind, title, message, button) {
   controls['permission-card'].dataset.state = kind;
-  controls['permission-title'].textContent = title;
-  controls.message.textContent = message;
-  controls['permission-step'].textContent = kind === 'ready' ? 'ALL SET' : kind === 'pending' ? 'CHECK THE CHROME PROMPT' : 'MICROPHONE ACCESS';
-  controls.enable.textContent = button;
+  controls['permission-title'].textContent = t(title);
+  controls.message.textContent = t(message);
+  controls['permission-step'].textContent = t(kind === 'ready' ? 'ALL SET' : kind === 'pending' ? 'CHECK THE CHROME PROMPT' : 'MICROPHONE ACCESS');
+  controls.enable.textContent = t(button);
   controls.enable.disabled = kind === 'pending';
 }
 async function closeSetup() {
@@ -29,7 +30,7 @@ async function complete() {
   controls.enable.hidden = true; controls.settings.hidden = true;
   controls['system-help'].hidden = true; controls['resume-hint'].hidden = true;
   controls.return.hidden = false;
-  controls.return.textContent = returnWindow === null ? 'Close setup' : 'Return to recorder';
+  controls.return.textContent = t(returnWindow === null ? 'Close setup' : 'Return to recorder');
   show('ready', 'Your microphone is ready', 'Access is enabled. Your audio will be processed on this device.', 'Microphone enabled');
   if (isExtension && session) {
     try {
@@ -37,8 +38,8 @@ async function complete() {
       if (response?.accepted) {
         await focusRecorder();
         await closeSetup();
-      } else controls.message.textContent = 'Access is enabled. Return to Ivrit Local and choose Start recording.';
-    } catch { controls.message.textContent = 'Access is enabled. Return to Ivrit Local and choose Start recording.'; }
+      } else controls.message.textContent = t('Access is enabled. Return to Ivrit Local and choose Start recording.');
+    } catch { controls.message.textContent = t('Access is enabled. Return to Ivrit Local and choose Start recording.'); }
   }
 }
 async function requestMicrophone() {
@@ -69,7 +70,7 @@ controls.settings.addEventListener('click', async () => {
     const tab = await chrome.tabs.create(options);
     if (tab.windowId) await chrome.windows.update(tab.windowId, { focused: true });
   } catch {
-    controls.message.textContent = 'Open chrome://settings/content/microphone in Chrome, allow Ivrit Local, then return here and choose Try again.';
+    controls.message.textContent = t('Open chrome://settings/content/microphone in Chrome, allow Ivrit Local, then return here and choose Try again.');
   }
 });
 controls.return.addEventListener('click', async () => {
@@ -77,14 +78,15 @@ controls.return.addEventListener('click', async () => {
   if (returnWindow === null) return closeSetup();
   const opened = chrome.sidePanel.open({ windowId: returnWindow });
   try { await opened; await focusRecorder(); await closeSetup(); }
-  catch { controls.message.textContent = 'Close this window and open Ivrit Local from its toolbar icon. Microphone access is enabled.'; }
+  catch { controls.message.textContent = t('Close this window and open Ivrit Local from its toolbar icon. Microphone access is enabled.'); }
 });
 const platform = navigator.userAgentData?.platform || navigator.platform || '';
-controls['system-instructions'].textContent = /mac/i.test(platform)
+controls['system-instructions'].textContent = t(/mac/i.test(platform)
   ? 'macOS: System Settings → Privacy & Security → Microphone → enable Google Chrome. Then return here and choose Try again.'
   : /win/i.test(platform)
     ? 'Windows: Settings → Privacy & security → Microphone. Enable microphone access and allow desktop apps, including Google Chrome.'
-    : 'Open your computer’s microphone privacy settings and allow Google Chrome to use your microphone.';
+    : 'Open your computer’s microphone privacy settings and allow Google Chrome to use your microphone.');
+IvritI18n.apply();
 if (isExtension && query.get('request') === '1' && session) {
   controls['resume-hint'].hidden = false;
   requestMicrophone();

@@ -13,7 +13,7 @@
     },
     "about.html": {
       "bytes": 3885,
-      "sha256": "a59844beafa0bbd37eb8c63c24430bb35ca799d44ec398349f5cd3c844892d2d"
+      "sha256": "6a85fd00db4a0d9829515fa8c98fe26f182cd0c21bb271ab11c66f10ff888cb0"
     },
     "audio-worklet.js": {
       "bytes": 1002,
@@ -24,8 +24,8 @@
       "sha256": "afe9a8fe0a7e5649ce33d5bfbd95da7e8e2555e5813f211c1d360642b11e56d0"
     },
     "capture-target.js": {
-      "bytes": 10089,
-      "sha256": "42a4e1e819bb5a48f57b5079c6c72575e46526b4be379c175fe6f8f712fe9691"
+      "bytes": 10152,
+      "sha256": "2b87ada48d411befd701a5e6021988e7cb664b0ec1028ef99f80d93db2d0bd76"
     },
     "demo/SOURCE.json": {
       "bytes": 608,
@@ -44,8 +44,8 @@
       "sha256": "5db0e2eab85913d98d7090e8af6a39553b70a9cd5177c4fe24673e6774f0a0a5"
     },
     "i18n.js": {
-      "bytes": 10746,
-      "sha256": "da7fadbb83d57da817967ffe5596b02cd07c55470e02ff5e891f3139e161148d"
+      "bytes": 24492,
+      "sha256": "cfef900000e66e77b156bb03cfb313307a1bd952dc22e7f9f0c9382ce2a33855"
     },
     "icons/128.png": {
       "bytes": 3485,
@@ -60,24 +60,24 @@
       "sha256": "970f313812fea7c00c1e4ed43156aedd2999d4098d4c6eef09f381e6716a924d"
     },
     "manifest.json": {
-      "bytes": 1223,
-      "sha256": "363bd1836b26d05e7d3adddf7d2e1b7be3b16be231a4271fafe53b3e5d3c889d"
+      "bytes": 1302,
+      "sha256": "90b9129afd8cc3c1f22217ce4f23d5ed8839a10d1f19922b0cc6124a68e6b876"
     },
     "microphone-access.js": {
       "bytes": 2380,
       "sha256": "af771e15c9e25613376f9bb3d4780898e3de75851acab3f67f1c69e1fdc2b22a"
     },
     "microphone.css": {
-      "bytes": 1869,
-      "sha256": "6d88872dabb8fd3be0c3b8a91eeb0c5672e50f2cb63bbdbcadf593c464b5d005"
+      "bytes": 1885,
+      "sha256": "1f86500720eb3d7f92599f884cb4086e51fbe00fef92f523d2920d5e9374dd27"
     },
     "microphone.html": {
-      "bytes": 2118,
-      "sha256": "7c8e26a8639e7a56243d0928328fd67d5b07a278ac37a2f758c5439675c9fd89"
+      "bytes": 2332,
+      "sha256": "ff39591a00884cd482c40107b5271ae6206cba2ee6fc07bb44edadbc08fada6e"
     },
     "microphone.js": {
-      "bytes": 5002,
-      "sha256": "7090e3519f789d2b4296399307dafb08248b7db5bf82f752febd3aaf58602ad9"
+      "bytes": 5090,
+      "sha256": "bc11c4378a13d468be86bac8698e19c38a680b796ec1026b20bfe939e05571cd"
     },
     "model/CC-BY-4.0.txt": {
       "bytes": 18657,
@@ -104,20 +104,20 @@
       "sha256": "e4ebb5e72a6aeef47437a55fa2308ebbedb7c51c557de7a89bf965c23ea9af4a"
     },
     "panel.css": {
-      "bytes": 8059,
-      "sha256": "2046fe679c75701942d17cfb3a08c4730453dd1ae0a076515e6a91addb3d5b8e"
+      "bytes": 7800,
+      "sha256": "6f4958d345fdb7b214ac55dbc0e10678e64f34f8d1b209d0b6160788ae40de78"
     },
     "panel.html": {
-      "bytes": 6676,
-      "sha256": "0ca4dd864d8ad70bf8932fceb7ae5ce4f282deb0b8caf1264a9dc9f5887fc4c1"
+      "bytes": 7096,
+      "sha256": "a353b793487847c19a076f6ee1391210e003a01833c482a0e0141cc9871a288f"
     },
     "panel.js": {
-      "bytes": 30499,
-      "sha256": "bd4d66e4c6848c6a3760b1888d2aac64eb9943b9daee127896efd3be34baa61f"
+      "bytes": 30259,
+      "sha256": "6c8b97b0e6e4126f46571b1d11ebae3395ca440672c7705abc422f74b9bee763"
     },
     "privacy.html": {
-      "bytes": 6300,
-      "sha256": "f99f4c5707664ee05d057e200dc81ef21e19b181c6880d94a699a2d7fce8b76d"
+      "bytes": 6277,
+      "sha256": "e957e36eb2ebd2f0e83ade98b8e56c0989592d6f60038946d936ded2b9ab0524"
     },
     "transcript-tools.js": {
       "bytes": 2526,

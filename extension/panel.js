@@ -1,5 +1,5 @@
 const $ = (id) => document.getElementById(id);
-const ui = Object.fromEntries(['record','record-label','upload','sample','file','clear','copy','insert','transcript','status','status-label','timer','notice','word-count','metrics','level','progress','grant-mic','cancel-setup','transcript-hint','cancel-insert','audio-source','source-hint','record-mic-icon','download-txt','download-srt','download-vtt','undo-insert','insertion-access','insertion-site','insertion-all-sites','enable-insertion','save-draft','delete-draft','revoke-sites','retention-note','ui-language'].map((id) => [id, $(id)]));
+const ui = Object.fromEntries(['record','record-label','upload','sample','file','clear','copy','insert','transcript','status','status-label','timer','notice','word-count','metrics','level','progress','grant-mic','cancel-setup','transcript-hint','cancel-insert','audio-source','source-hint','record-mic-icon','download-txt','download-srt','download-vtt','undo-insert','insertion-access','insertion-site','insertion-all-sites','enable-insertion','save-draft','delete-draft','revoke-sites','retention-note'].map((id) => [id, $(id)]));
 const inExtension = Boolean(globalThis.chrome?.runtime?.id);
 let worker, ready = false, fatal = false, phase = 'loading', activeJob = 0, sequence = 0;
 let prefix = '', media, context, source, capture, silent, timerInterval, flushed;
@@ -43,7 +43,7 @@ function setPhase(next, message) {
 function updateOutput() {
   const text = ui.transcript.value.trim();
   const count = text ? text.split(/\s+/u).length : 0;
-  ui['word-count'].textContent = IvritI18n.language === 'he' ? `${count} ${count===1?'מילה':'מילים'}` : `${count} ${count===1?'word':'words'}`;
+  ui['word-count'].textContent = `${count} ${count===1?'מילה':'מילים'}`;
   const editable = ['idle', 'error'].includes(phase);
   ui.copy.disabled = !text || !editable;
   ui.insert.disabled = !text || !editable || !inExtension || Boolean(insertion);
@@ -86,8 +86,8 @@ function setupWorker() {
     if (data.type === 'finished') {
       resultText(data.text, data.cues);
       ui.timer.textContent = elapsed(data.audioSeconds);
-      if (phase === 'file') ui.metrics.textContent = `${data.audioSeconds.toFixed(1)} s audio · ${data.elapsedSeconds.toFixed(1)} s processing`;
-      else ui.metrics.textContent = `${data.audioSeconds.toFixed(1)} s captured`;
+      if (phase === 'file') ui.metrics.textContent = `${data.audioSeconds.toFixed(1)} שניות שמע · ${data.elapsedSeconds.toFixed(1)} שניות עיבוד`;
+      else ui.metrics.textContent = `${data.audioSeconds.toFixed(1)} שניות הוקלטו`;
       setPhase('idle', data.text ? 'All done. Edit, copy, or insert your text.' : 'No speech recognized. Try speaking closer to the microphone.');
       endedWaiter?.resolve(); endedWaiter = null;
     }
@@ -233,7 +233,7 @@ async function startRecording(fromSetup = false, selectedSource = 'microphone') 
         lastAudioAt = sentSamples;
         ui.status.textContent = t(listeningMessage());
       } else if (sentSamples - lastAudioAt > 16000 * 6 && phase === 'recording') {
-        ui.status.textContent = recordingSource === 'tab' ? 'No tab audio detected. Play the video and check its volume.' : 'No microphone audio detected. To transcribe YouTube, choose Browser tab as the audio source.';
+        ui.status.textContent = t(recordingSource === 'tab' ? 'No tab audio detected. Play the video and check its volume.' : 'No microphone audio detected. To transcribe YouTube, choose Browser tab as the audio source.');
       }
       if (sentSamples + data.samples.length > limits.MAX_SECONDS * 16000) { stopRecording(); notice('Session reached 60 minutes. Export your transcript before starting another.'); return; }
       sendAudio(data.samples);
@@ -475,8 +475,6 @@ function retentionNote(){ui['retention-note'].textContent=t(ui['save-draft'].che
 ui['delete-draft'].addEventListener('click',()=>{try{localStorage.removeItem('draft');localStorage.setItem('save-draft','false');}catch{}ui['save-draft'].checked=false;retentionNote();notice('Saved draft deleted. The current transcript is still here.');});
 try{ui['save-draft'].checked=localStorage.getItem('save-draft')==='true';const restored=limits.readDraft(localStorage);if(restored){ui.transcript.value=restored.text;cues=restored.cues;notice('Recovered your local draft.');}}catch{}
 retentionNote();
-ui['ui-language'].value=IvritI18n.language;
-ui['ui-language'].addEventListener('change',()=>{persistDraft();IvritI18n.setLanguage(ui['ui-language'].value);updateOutput();retentionNote();});
 IvritI18n.apply();
 
 // Upgrade migration: remove the previous build's blanket grant once. Future all-site

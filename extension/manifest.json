@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Ivrit Local \u2014 Hebrew Dictation",
-  "version": "0.2.0",
-  "description": "Private Hebrew dictation. The speech model is bundled and runs on your device, even offline.",
+  "name": "Ivrit Local — תמלול בעברית",
+  "version": "0.2.1",
+  "description": "תמלול פרטי בעברית. מודל זיהוי הדיבור כלול בתוסף ופועל במכשיר שלכם, גם ללא אינטרנט.",
   "minimum_chrome_version": "116",
   "permissions": [
     "sidePanel",
@@ -14,7 +14,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Open Ivrit Local"
+    "default_title": "פתיחת Ivrit Local"
   },
   "side_panel": {
     "default_path": "panel.html"
@@ -25,7 +25,7 @@
         "default": "Ctrl+Shift+Y",
         "mac": "Command+Shift+Y"
       },
-      "description": "Open Hebrew dictation"
+      "description": "פתיחת תמלול בעברית"
     }
   },
   "icons": {

@@ -1,7 +1,7 @@
 /* Local interface translations. Technical/browser errors may retain their original wording. */
 (function(root){
   const he={
-    'Interface language':'שפת ממשק','Audio recording':'הקלטת שמע','Incoming audio level':'עוצמת השמע הנכנס','Audio transcription progress':'התקדמות התמלול',
+    'Audio recording':'הקלטת שמע','Incoming audio level':'עוצמת השמע הנכנס','Audio transcription progress':'התקדמות התמלול',
     'Your voice. Your device.':'הקול שלך. המכשיר שלך.',
     'On-device recognition':'זיהוי דיבור מקומי','Works offline':'פועל ללא אינטרנט',
     'Audio source':'מקור שמע','Microphone':'מיקרופון','Browser tab audio':'שמע מלשונית',
@@ -51,14 +51,117 @@
     'Choose Allow in the setup window. Recording will start here afterwards.':'בחרו אישור בחלון ההגדרה. ההקלטה תתחיל כאן לאחר מכן.',
     'Browser preview: recording, files, and recognition run locally. Page insertion is available when installed as an extension.':'תצוגה מקדימה: הזיהוי פועל במכשיר. הוספה לדפים זמינה לאחר התקנת התוסף.',
     'Choose the Chrome tab playing your video and turn on Share tab audio.':'בחרו את לשונית הסרטון ב־Chrome והפעילו שיתוף שמע מהלשונית.',
-    'Transcription cancelled. Your text is still here.':'התמלול בוטל. הטקסט עדיין כאן.'
+    'Transcription cancelled. Your text is still here.':'התמלול בוטל. הטקסט עדיין כאן.',
+    "No speech recognized. Try speaking closer to the microphone.":"לא זוהה דיבור. נסו לדבר קרוב יותר למיקרופון.",
+    "Chrome could not open microphone setup. Select Set up microphone access to try again.":"לא ניתן לפתוח את הגדרת המיקרופון. לחצו על הגדרת הרשאת מיקרופון כדי לנסות שוב.",
+    "Microphone setup was closed. You can try again or choose an audio file.":"חלון הגדרת המיקרופון נסגר. אפשר לנסות שוב או לבחור קובץ שמע.",
+    "Tab audio capture is unavailable in this browser. Open the extension in desktop Google Chrome.":"לכידת שמע מלשונית אינה זמינה בדפדפן הזה. פתחו את התוסף ב־Google Chrome במחשב.",
+    "Choose a Chrome tab rather than a window or screen, and enable Share tab audio.":"בחרו לשונית Chrome והפעילו שיתוף שמע מהלשונית. אין לבחור חלון או מסך.",
+    "No tab audio was shared. Try again, choose the YouTube tab, and turn on Share tab audio before clicking Share.":"לא שותף שמע מהלשונית. נסו שוב: בחרו בלשונית YouTube והפעילו שיתוף שמע לפני הלחיצה על שיתוף.",
+    "Audio sharing ended before transcription started. Please try again.":"שיתוף השמע הסתיים לפני תחילת התמלול. נסו שוב.",
+    "This browser did not provide 16 kHz audio. Try uploading an audio file.":"הדפדפן לא סיפק שמע בתדר 16 קילוהרץ. נסו לבחור קובץ שמע.",
+    "This browser did not provide 16 kHz audio.":"הדפדפן לא סיפק שמע בתדר 16 קילוהרץ.",
+    "Session reached 60 minutes. Export your transcript before starting another.":"ההקלטה הגיעה ל־60 דקות. הורידו את התמלול לפני התחלת הקלטה נוספת.",
+    "Tab sharing was cancelled or blocked. Choose a tab to try again.":"שיתוף הלשונית בוטל או נחסם. בחרו לשונית כדי לנסות שוב.",
+    "Choose the Chrome tab playing your video and enable Share tab audio. Microphone access is not needed.":"בחרו את לשונית הסרטון ב־Chrome והפעילו שיתוף שמע מהלשונית. אין צורך בהרשאת מיקרופון.",
+    "The sample file is missing.":"קובץ הדוגמה חסר.",
+    "Copy was blocked. Your text is selected—press Command/Ctrl+C.":"ההעתקה נחסמה. הטקסט מסומן — לחצו על Command/Ctrl+C.",
+    "Could not reach this page. Try Copy text.":"לא ניתן לגשת לדף הזה. נסו להעתיק את הטקסט.",
+    "Enter a website address beginning with https:// or http://.":"הזינו כתובת אתר שמתחילה ב־https:// או ב־http://.",
+    "Website access was declined. You can still copy your text.":"הרשאת האתר לא אושרה. עדיין אפשר להעתיק את הטקסט.",
+    "Website access could not be enabled.":"לא ניתן לאשר גישה לאתר.",
+    "This insertion can no longer be undone.":"כבר לא ניתן לבטל את ההוספה הזאת.",
+    "The page changed. This insertion can no longer be undone.":"הדף השתנה. כבר לא ניתן לבטל את ההוספה הזאת.",
+    "Saved website access revoked. Temporary access ends when the tab navigates or closes.":"הרשאות האתרים השמורות בוטלו. גישה זמנית מסתיימת במעבר לדף אחר או בסגירת הלשונית.",
+    "Open Chrome’s extension settings to revoke website access.":"פתחו את הגדרות התוסף ב־Chrome כדי לבטל גישה לאתרים.",
+    "Download requested. Check your browser’s downloads.":"ההורדה התבקשה. בדקו את ההורדות בדפדפן.",
+    "Local recovery could not be saved. Download your transcript.":"לא ניתן לשמור טיוטת שחזור מקומית. הורידו את התמלול.",
+    "Local recovery is unavailable. Use Download TXT.":"השחזור המקומי אינו זמין. השתמשו בהורדת טקסט.",
+    "Capture stopped because the panel was hidden.":"ההקלטה נעצרה כי החלונית הוסתרה.",
+    "ONE QUICK PERMISSION":"רק הרשאה אחת",
+    "Let’s enable your microphone":"נפעיל את המיקרופון",
+    "Choose Enable microphone, then Allow in Chrome’s permission prompt.":"לחצו על הפעלת מיקרופון, ואז על אישור בבקשת ההרשאה של Chrome.",
+    "After you allow access, this window closes and recording starts in your side panel.":"לאחר האישור החלון ייסגר וההקלטה תתחיל בחלונית הצד.",
+    "Open Chrome microphone settings":"פתיחת הגדרות המיקרופון ב־Chrome",
+    "Return to recorder":"חזרה להקלטה",
+    "Check your computer’s microphone settings":"בדיקת הגדרות המיקרופון במחשב",
+    "If your computer asks you to restart Chrome, save your work first.":"אם המחשב מבקש להפעיל מחדש את Chrome, שמרו קודם את העבודה.",
+    "Audio stays on this device. No cloud.":"השמע נשאר במכשיר הזה. ללא ענן.",
+    "Cancel setup":"ביטול ההגדרה",
+    "ALL SET":"הכול מוכן",
+    "CHECK THE CHROME PROMPT":"בדקו את בקשת ההרשאה ב־Chrome",
+    "MICROPHONE ACCESS":"הרשאת מיקרופון",
+    "Close setup":"סגירת חלון ההגדרה",
+    "Your microphone is ready":"המיקרופון מוכן",
+    "Access is enabled. Your audio will be processed on this device.":"ההרשאה אושרה. השמע יעובד במכשיר הזה.",
+    "Microphone enabled":"המיקרופון הופעל",
+    "Access is enabled. Return to Ivrit Local and choose Start recording.":"ההרשאה אושרה. חזרו ל־Ivrit Local ולחצו על התחלת הקלטה.",
+    "Choose Allow in Chrome":"בחרו אישור ב־Chrome",
+    "Chrome may show its microphone permission prompt near the address bar. Choose Allow to continue.":"בקשת הרשאה למיקרופון עשויה להופיע ליד שורת הכתובת ב־Chrome. בחרו אישור כדי להמשיך.",
+    "Waiting for Chrome…":"ממתינים ל־Chrome…",
+    "Open chrome://settings/content/microphone in Chrome, allow Ivrit Local, then return here and choose Try again.":"פתחו ב־Chrome את chrome://settings/content/microphone, אשרו גישה ל־Ivrit Local, חזרו לכאן ולחצו על ניסיון נוסף.",
+    "Close this window and open Ivrit Local from its toolbar icon. Microphone access is enabled.":"סגרו את החלון ופתחו את Ivrit Local מסמל התוסף בסרגל הכלים. הרשאת המיקרופון אושרה.",
+    "macOS: System Settings → Privacy & Security → Microphone → enable Google Chrome. Then return here and choose Try again.":"ב־macOS: הגדרות המערכת ← פרטיות ואבטחה ← מיקרופון ← הפעילו את Google Chrome. לאחר מכן חזרו לכאן ולחצו על ניסיון נוסף.",
+    "Windows: Settings → Privacy & security → Microphone. Enable microphone access and allow desktop apps, including Google Chrome.":"ב־Windows: הגדרות ← פרטיות ואבטחה ← מיקרופון. הפעילו גישה למיקרופון ואשרו יישומי שולחן עבודה, כולל Google Chrome.",
+    "Open your computer’s microphone privacy settings and allow Google Chrome to use your microphone.":"פתחו את הגדרות פרטיות המיקרופון במחשב ואשרו ל־Google Chrome להשתמש במיקרופון.",
+    "No microphone found":"לא נמצא מיקרופון",
+    "Check again":"בדיקה חוזרת",
+    "Connect a microphone or headset, then try again. You can also transcribe an audio file from the side panel.":"חברו מיקרופון או אוזניות ונסו שוב. אפשר גם לתמלל קובץ שמע מחלונית הצד.",
+    "Your microphone could not open":"לא ניתן להפעיל את המיקרופון",
+    "Try again":"ניסיון נוסף",
+    "Close other apps that might be using your microphone, check its connection, then try again.":"סגרו יישומים אחרים שעשויים להשתמש במיקרופון, בדקו את החיבור ונסו שוב.",
+    "Allow Chrome to use your microphone":"אשרו ל־Chrome להשתמש במיקרופון",
+    "Your computer is blocking microphone access for Google Chrome. Enable Chrome in your system’s microphone privacy settings, then try again.":"המחשב חוסם גישה למיקרופון עבור Google Chrome. אשרו את Chrome בהגדרות פרטיות המיקרופון במערכת ונסו שוב.",
+    "Microphone access is blocked":"הגישה למיקרופון חסומה",
+    "Open Chrome’s microphone settings and allow Ivrit Local. If Chrome is blocked by your computer, enable it in your system’s microphone privacy settings too.":"פתחו את הגדרות המיקרופון ב־Chrome ואשרו את Ivrit Local. אם המחשב חוסם את Chrome, אשרו אותו גם בהגדרות פרטיות המיקרופון במערכת.",
+    "Show permission prompt":"הצגת בקשת הרשאה",
+    "The permission request was not approved. Try again and choose Allow in Chrome’s microphone prompt.":"בקשת ההרשאה לא אושרה. נסו שוב ובחרו אישור בבקשת המיקרופון של Chrome.",
+    "Let’s try that again":"ננסה שוב",
+    "Chrome could not open the microphone. Try again, or choose an audio file in the side panel.":"Chrome לא הצליח להפעיל את המיקרופון. נסו שוב או בחרו קובץ שמע בחלונית הצד.",
+    "This field is no longer visible or editable. Choose another field.":"השדה כבר אינו גלוי או ניתן לעריכה. בחרו שדה אחר.",
+    "The transcript is too long for this field.":"התמלול ארוך מדי לשדה הזה.",
+    "The field has changed. Undo was skipped to protect newer edits.":"השדה השתנה. ההוספה לא בוטלה כדי לשמור על העריכות החדשות.",
+    "Insertion timed out. Click Insert to choose a field again.":"זמן בחירת השדה הסתיים. לחצו על הוספה כדי לבחור שוב.",
+    "There is no text to insert.":"אין טקסט להוספה.",
+    "This page does not support insertion. Try Copy text.":"הדף אינו תומך בהוספה. נסו להעתיק את הטקסט.",
+    "Invalid insertion request.":"בקשת ההוספה אינה תקינה.",
+    "The transcript is empty or exceeds 200,000 characters.":"התמלול ריק או ארוך מ־200,000 תווים.",
+    "The active page changed. Click Insert again.":"הדף הפעיל השתנה. לחצו שוב על הוספה.",
+    "Open a regular website to insert text.":"פתחו אתר רגיל כדי להוסיף טקסט.",
+    "Chrome protects the Web Store from insertion. Use Copy text on another page.":"Chrome מגן על חנות התוספים מפני הוספה. השתמשו בהעתקת טקסט בדף אחר.",
+    "Choose an audio file smaller than 64 MB.":"בחרו קובץ שמע קטן מ־64 מגה־בייט.",
+    "This audio file is empty.":"קובץ השמע ריק.",
+    "The audio file did not load. Try another file.":"קובץ השמע לא נטען. נסו קובץ אחר.",
+    "Chrome could not decode this audio file. Try WAV, MP3, or M4A.":"Chrome לא הצליח לפענח את קובץ השמע. נסו WAV, MP3 או M4A.",
+    "Choose a finite audio file no longer than 60 minutes.":"בחרו קובץ שמע באורך ידוע של עד 60 דקות.",
+    "Transcript reached the 200,000 character limit. Export it and start another session.":"התמלול הגיע למגבלה של 200,000 תווים. הורידו אותו והתחילו תמלול נוסף.",
+    "Could not start recognition.":"לא ניתן להתחיל את זיהוי הדיבור.",
+    "Audio exceeds the 60-minute session limit.":"השמע ארוך ממגבלת 60 הדקות לתמלול.",
+    "The bundled model could not be initialized.":"לא ניתן להפעיל את המודל המצורף.",
+    "0 words":"0 מילים",
+    "Transcript limit reached. Download your text and clear it before continuing.":"התמלול הגיע למגבלת האורך. הורידו את הטקסט ונקו אותו לפני ההמשך.",
+    "The speech engine stopped unexpectedly.":"מנוע הדיבור נעצר באופן בלתי צפוי.",
+    "This computer could not keep up with live recognition. Try an audio file instead.":"המחשב לא הצליח לעמוד בקצב הזיהוי בזמן אמת. נסו לתמלל קובץ שמע.",
+    "Click Choose tab & transcribe again to open Chrome’s sharing picker.":"לחצו שוב על בחירת לשונית ותמלול כדי לפתוח את חלון השיתוף של Chrome.",
+    "The audio capture did not stop cleanly. Please try again.":"ההקלטה לא נעצרה כראוי. נסו שוב.",
+    "Recognition could not keep up. Your completed text is still available.":"הזיהוי לא הצליח לעמוד בקצב. הטקסט שכבר תומלל עדיין זמין.",
+    "The file could not be played. Your completed text is still available.":"לא ניתן לנגן את הקובץ. הטקסט שכבר תומלל עדיין זמין."
   };
-  let language='en';try{language=localStorage.getItem('ui-language')==='he'?'he':'en';}catch{}
-  const reverse=new Map(Object.entries(he).map(([en,value])=>[value,en]));
-  function t(text){return language==='he'?(he[text]||text):(reverse.get(text)||text);}
+  function t(text){
+    if(he[text])return he[text];
+    const prefixes={
+      'Could not load the speech model. ':'לא ניתן לטעון את מודל הדיבור. ',
+      'Recognition failed. ':'זיהוי הדיבור נכשל. ',
+      'Missing bundled file: ':'קובץ מצורף חסר: '
+    };
+    for(const [prefix,translation] of Object.entries(prefixes)){
+      if(typeof text==='string'&&text.startsWith(prefix))return translation+t(text.slice(prefix.length));
+    }
+    return text;
+  }
   function apply(){
+    if(root.document?.documentElement){document.documentElement.lang='he';document.documentElement.dir='rtl';}
     if(!root.document?.createTreeWalker)return;
-    document.documentElement.lang=language;document.documentElement.dir=language==='he'?'rtl':'ltr';
     const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;
     while((node=walker.nextNode())){
       if(['SCRIPT','STYLE'].includes(node.parentElement?.tagName))continue;
@@ -67,6 +170,5 @@
     }
     for(const element of document.querySelectorAll('[aria-label]')){const value=element.getAttribute('aria-label');element.setAttribute('aria-label',t(value));}
   }
-  function setLanguage(value){language=value==='he'?'he':'en';try{localStorage.setItem('ui-language',language);}catch{}apply();}
-  root.IvritI18n={get language(){return language;},t,apply,setLanguage};
+  root.IvritI18n={t,apply};
 })(globalThis);

@@ -126,7 +126,7 @@
     const sheet = new CSSStyleSheet();
     sheet.replaceSync(`
       :host { all: initial !important; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; pointer-events: none !important; }
-      .banner { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: calc(100vw - 48px); box-sizing: border-box; display: flex; align-items: center; gap: 18px; padding: 14px 18px; border-radius: 14px; background: #163c32; color: #fff; box-shadow: 0 8px 32px #0003; font: 14px/1.5 system-ui, sans-serif; direction: ltr; pointer-events: auto; }
+      .banner { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: calc(100vw - 48px); box-sizing: border-box; display: flex; align-items: center; gap: 18px; padding: 14px 18px; border-radius: 14px; background: #163c32; color: #fff; box-shadow: 0 8px 32px #0003; font: 14px/1.5 system-ui, sans-serif; direction: rtl; pointer-events: auto; }
       strong { display: block; font-weight: 650; } small { color: #d2e5db; font-size: 12px; }
       button { color: #fff; background: #ffffff18; border: 1px solid #ffffff60; border-radius: 8px; padding: 7px 10px; cursor: pointer; font: inherit; }
       button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
@@ -134,12 +134,12 @@
       [hidden] { display: none !important; }
     `);
     root.adoptedStyleSheets = [sheet];
-    const banner = document.createElement('div'); banner.className = 'banner'; banner.setAttribute('role', 'status');
+    const banner = document.createElement('div'); banner.className = 'banner'; banner.setAttribute('role', 'status'); banner.lang = 'he';
     const copy = document.createElement('div');
-    const title = document.createElement('strong'); title.textContent = 'Click where to insert your text';
-    const hint = document.createElement('small'); hint.textContent = 'Ivrit Local · Choose a text field on this page';
+    const title = document.createElement('strong'); title.textContent = 'לחצו במקום שבו תרצו להוסיף את הטקסט';
+    const hint = document.createElement('small'); hint.textContent = 'Ivrit Local · בחרו שדה טקסט בדף הזה';
     copy.append(title, hint);
-    const cancel = document.createElement('button'); cancel.textContent = 'Cancel'; cancel.type = 'button';
+    const cancel = document.createElement('button'); cancel.textContent = 'ביטול'; cancel.type = 'button';
     cancel.addEventListener('click', () => stop({ ok: false }));
     banner.append(copy, cancel);
     const ring = document.createElement('div'); ring.className = 'ring'; ring.hidden = true;

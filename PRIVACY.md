@@ -17,7 +17,7 @@ and executable runtime are bundled in the installed extension. Recognition works
   and transcripts have resource limits documented in the README.
 - **Transcripts and captions:** recognized text and approximate recognizer timestamps.
   You may edit, copy, export, or insert this text. Names, numbers and timing may be incorrect.
-- **Preferences:** interface language and whether you enable local draft recovery.
+- **Preferences:** whether you enable local draft recovery.
 
 We do not receive, sell, or use your audio or transcripts to train models. The extension
 performs no background collection of browsing history, page contents, or unrelated form data.

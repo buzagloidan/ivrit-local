@@ -24,7 +24,7 @@ async function setup({ error, audio = true, surface = 'browser', unsupported = f
 }
 (async () => {
   const tab = await setup();
-  assert.equal(tab.elements.get('record-label').textContent, 'Choose tab & transcribe');
+  assert.equal(tab.elements.get('record-label').textContent, 'בחירת לשונית ותמלול');
   const click = tab.click('record');
   assert.equal(tab.order.length, 1, 'Picker called during Record click, without a preceding asynchronous permission query');
   await click;
@@ -34,15 +34,15 @@ async function setup({ error, audio = true, surface = 'browser', unsupported = f
   assert.equal(tab.order[0].monitorTypeSurfaces, 'exclude');
   assert.equal(tab.calls.audio, 0, 'No microphone request'); assert.equal(tab.calls.windows.length, 0);
   assert.equal(tab.videoTrack.enabled, false, 'Unused video frames disabled');
-  assert.equal(tab.elements.get('status-label').textContent, 'LISTENING TO TAB');
+  assert.equal(tab.elements.get('status-label').textContent, 'מקשיבים ללשונית');
   assert.equal(tab.elements.get('audio-source').disabled, true);
   console.log('PASS: tab mode opens picker within the click, preserves playback, never requests microphone');
 
   for (let i = 0; i < 50; i++) tab.samples(new Float32Array(2048));
-  assert.match(tab.elements.get('status').textContent, /No tab audio detected/);
+  assert.match(tab.elements.get('status').textContent, /לא זוהה שמע בלשונית/);
   tab.samples(new Float32Array(2048).fill(0.1));
   assert(tab.elements.get('level').value > 0);
-  assert.match(tab.elements.get('status').textContent, /Listening to your selected tab/);
+  assert.match(tab.elements.get('status').textContent, /מקשיבים לעברית בלשונית/);
   assert(tab.messages.some(message => message.type === 'audio'));
   await tab.click('record');
   assert.deepEqual(tab.stopped.sort(), ['audio', 'video']);
@@ -56,11 +56,11 @@ async function setup({ error, audio = true, surface = 'browser', unsupported = f
   console.log('PASS: Chrome Stop sharing / tab closure finishes the transcript and releases capture');
 
   const noAudio = await setup({ audio: false }); await noAudio.click('record');
-  assert.deepEqual(noAudio.stopped, ['video']); assert.match(noAudio.elements.get('notice').textContent, /Share tab audio/);
+  assert.deepEqual(noAudio.stopped, ['video']); assert.match(noAudio.elements.get('notice').textContent, /שיתוף שמע/);
   assert.equal(noAudio.elements.get('record').disabled, false);
   assert(!noAudio.messages.some(message => message.type === 'start'));
   const wrongSurface = await setup({ surface: 'window' }); await wrongSurface.click('record');
-  assert.deepEqual(wrongSurface.stopped.sort(), ['audio', 'video']); assert.match(wrongSurface.elements.get('notice').textContent, /Chrome tab rather than/);
+  assert.deepEqual(wrongSurface.stopped.sort(), ['audio', 'video']); assert.match(wrongSurface.elements.get('notice').textContent, /אין לבחור חלון או מסך/);
   console.log('PASS: missing audio and non-tab sources give actionable recovery and stop every track');
 
   for (const name of ['NotAllowedError', 'AbortError', 'InvalidStateError']) {
@@ -70,7 +70,7 @@ async function setup({ error, audio = true, surface = 'browser', unsupported = f
     assert.equal(rejected.elements.get('record').disabled, false); assert.equal(rejected.elements.get('grant-mic').hidden, true);
   }
   const unsupported = await setup({ unsupported: true }); await unsupported.click('record');
-  assert.match(unsupported.elements.get('notice').textContent, /unavailable/);
+  assert.match(unsupported.elements.get('notice').textContent, /אינה זמינה/);
   console.log('PASS: dismissed, blocked, unfocused, and unsupported picker paths recover without microphone setup');
   console.log('All tab-audio flow checks passed. No actual tab was captured.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -5,7 +5,7 @@ and audio-file transcription run on your device using a bundled 66M-parameter Zi
 model and sherpa-onnx WebAssembly. No account, API key, backend, analytics or model download
 after installation.
 
-**0.2.0 beta:** security-hardened development release. Not submitted to or approved by the
+**0.2.1 beta:** security-hardened development release. Not submitted to or approved by the
 Chrome Web Store. Actual macOS/Windows Chrome acceptance gates are tracked in
 [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md); previews and unit tests do not replace them.
 
@@ -39,7 +39,7 @@ Alternatively build from source below. The installed extension never needs Pytho
   Basic inputs, textareas and contenteditable are supported; special editors/frames may need Copy.
 - **Undo insertion:** restores the most recent insertion when it is safe. It expires after five
   minutes and refuses to overwrite newer changes. Escape/Cancel disarms pending placement.
-- Choose **EN / עברית** for the interface. Some browser/technical error messages remain English.
+- The interface is Hebrew only, with right-to-left layout. Chrome’s own dialogs follow your browser language; technical diagnostics may retain their original wording.
 - Recovery is **off by default**. Privacy & recovery can keep one local draft for up to seven
   days, never Chrome Sync. Delete/disable it there. Download your work before closing otherwise.
 - Revoke saved site grants in Privacy & recovery or Chrome's extension settings. Upgrading from
@@ -77,7 +77,7 @@ npm run test:wasm
 python3 scripts/package.py
 ```
 
-Use `extension/` with Load unpacked, or extract `dist/ivrit-local-0.2.0.zip`. Large model/WASM
+Use `extension/` with Load unpacked, or extract `dist/ivrit-local-0.2.1.zip`. Large model/WASM
 assets are excluded from Git and fetched from pinned official sources; SHA-256 verification
 is mandatory. `assets-lock.json` records exact URLs/digests. The final ZIP includes everything,
 so users do not fetch a model on first use. `extension/BUNDLED_ASSETS.json` inventories each build.
