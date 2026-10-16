@@ -1,0 +1,27 @@
+{
+  "model_revision": "6c07526ebfdfc71d12ed4ce6aaebe32774a2613a",
+  "runtime_version": "1.13.7",
+  "assets": [
+    {
+      "path": "model/encoder.int8.onnx",
+      "url": "https://huggingface.co/thewh1teagle/zipformer2-66m-streaming-he/resolve/6c07526ebfdfc71d12ed4ce6aaebe32774a2613a/sherpa-onnx/encoder.int8.onnx",
+      "sha256": "6c6febcb74a09435315a1d872a6539f6e7fc2c333533f14c74edc0e85c49ffcd"
+    },
+    {
+      "path": "model/decoder.int8.onnx",
+      "url": "https://huggingface.co/thewh1teagle/zipformer2-66m-streaming-he/resolve/6c07526ebfdfc71d12ed4ce6aaebe32774a2613a/sherpa-onnx/decoder.int8.onnx",
+      "sha256": "feb03e7c8aa761593a9284a6fa1e91259be3702de75f630062256c1a59c5a906"
+    },
+    {
+      "path": "model/joiner.int8.onnx",
+      "url": "https://huggingface.co/thewh1teagle/zipformer2-66m-streaming-he/resolve/6c07526ebfdfc71d12ed4ce6aaebe32774a2613a/sherpa-onnx/joiner.int8.onnx",
+      "sha256": "1d2c6d8e6dabc5eb52de52e95718e9bdfbffbfe7ead3808fb5ffd74e83bd9cae"
+    },
+    {
+      "path": "vendor/sherpa-onnx-wasm-main-asr.wasm",
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.13.7/sherpa-onnx-wasm-simd-v1.13.7-en-asr-zipformer.tar.bz2",
+      "archive_sha256": "21559527d65f7674a45834870e4f51b0af14be27d4de1043aa6f576d9b426acc",
+      "sha256": "d0c15c3042fd61ca2a158a1eeb8b8c2099201f7580945efc8f729d2830cf746d"
+    }
+  ]
+}

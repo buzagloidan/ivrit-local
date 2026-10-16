@@ -1,0 +1,69 @@
+{
+  "audioSeconds": 1800,
+  "processingSeconds": 101.42,
+  "segments": 150,
+  "heapMiB": 512,
+  "rssGrowthAfterWarmupMiB": 0,
+  "memory": [
+    {
+      "audioSeconds": 0,
+      "rssMiB": 561
+    },
+    {
+      "audioSeconds": 120,
+      "rssMiB": 669
+    },
+    {
+      "audioSeconds": 240,
+      "rssMiB": 663
+    },
+    {
+      "audioSeconds": 360,
+      "rssMiB": 663
+    },
+    {
+      "audioSeconds": 480,
+      "rssMiB": 301
+    },
+    {
+      "audioSeconds": 600,
+      "rssMiB": 301
+    },
+    {
+      "audioSeconds": 720,
+      "rssMiB": 301
+    },
+    {
+      "audioSeconds": 840,
+      "rssMiB": 294
+    },
+    {
+      "audioSeconds": 960,
+      "rssMiB": 294
+    },
+    {
+      "audioSeconds": 1080,
+      "rssMiB": 295
+    },
+    {
+      "audioSeconds": 1200,
+      "rssMiB": 295
+    },
+    {
+      "audioSeconds": 1320,
+      "rssMiB": 298
+    },
+    {
+      "audioSeconds": 1440,
+      "rssMiB": 300
+    },
+    {
+      "audioSeconds": 1560,
+      "rssMiB": 300
+    },
+    {
+      "audioSeconds": 1680,
+      "rssMiB": 300
+    }
+  ]
+}

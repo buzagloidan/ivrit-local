@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ivrit Local — Hebrew dictation</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div><h1>Ivrit <span>Local</span></h1><p>Your voice. Your device.</p></div>
+      <select id="ui-language" class="language" aria-label="Interface language"><option value="en">EN</option><option value="he">עברית</option></select>
+    </header>
+
+    <div class="privacy"><span class="dot"></span> On-device recognition <span class="privacy-divider">·</span> Works offline</div>
+
+    <section class="recorder" aria-label="Audio recording">
+      <label class="source-label" for="audio-source">Audio source</label>
+      <div class="source-select">
+      <select id="audio-source" aria-describedby="source-hint" disabled>
+        <option value="microphone">Microphone</option>
+        <option value="tab">Browser tab audio</option>
+      </select>
+      </div>
+      <p id="source-hint" class="source-hint">Your voice. For YouTube, choose Browser tab audio.</p>
+      <div class="recorder-top"><span id="status-label">GETTING READY</span><span id="timer">00:00</span></div>
+      <div class="waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <p id="status" role="status" aria-live="polite">Starting the local speech engine…</p>
+      <meter id="level" min="0" max="1" value="0" aria-label="Incoming audio level" hidden></meter>
+      <progress id="progress" max="1" value="0" aria-label="Audio transcription progress" hidden></progress>
+      <button id="record" class="primary" disabled><span id="record-mic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3M9 21h6"></path></svg></span><span id="record-label">Loading model…</span></button>
+      <div class="secondary-actions"><button id="upload" class="text-button" disabled>Choose an audio file</button><span>·</span><button id="sample" class="text-button" disabled>Try a sample</button></div>
+      <div class="permission-actions"><button id="grant-mic" class="text-button" hidden>Set up microphone access</button><button id="cancel-setup" class="text-button" hidden>Cancel microphone setup</button></div>
+      <input id="file" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.webm,.flac" hidden>
+    </section>
+
+    <section class="transcript-section" aria-labelledby="transcript-label">
+      <div class="section-heading"><label id="transcript-label" for="transcript">Transcript</label><button id="clear" class="text-button muted" disabled>Clear</button></div>
+      <textarea id="transcript" dir="rtl" lang="he" spellcheck="false" placeholder="הטקסט שלך יופיע כאן…" aria-describedby="transcript-hint"></textarea>
+      <div class="transcript-meta"><span id="word-count">0 words</span><span id="metrics"></span></div>
+      <div class="output-actions"><button id="copy" class="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg>Copy text</button><button id="insert" class="button insert" disabled>Insert into page <span aria-hidden="true">↗</span></button></div>
+      <div class="export-actions"><button id="download-txt" class="text-button" disabled>Download TXT</button><button id="download-srt" class="text-button" disabled>Download SRT</button><button id="download-vtt" class="text-button" disabled>Download VTT</button><button id="undo-insert" class="text-button" hidden>Undo insertion</button></div>
+      <p class="hint" id="captions-hint">Captions use recognition timing. Review them before publishing; editing the transcript clears caption timing.</p>
+      <div id="insertion-access" class="settings-card" hidden>
+        <p>Chrome needs access to the destination website. Allow one site below, or explicitly enable all websites.</p>
+        <label for="insertion-site">Website address</label><input id="insertion-site" type="url" placeholder="https://example.com" autocomplete="off" spellcheck="false">
+        <label class="check-label"><input id="insertion-all-sites" type="checkbox"> Allow insertion on all HTTP/HTTPS websites</label>
+        <button id="enable-insertion" class="button">Allow &amp; insert</button>
+      </div>
+      <p id="transcript-hint" class="hint">Click Insert, then choose a visible field. Text is shared with that website only when you place it. Never inserts into passwords or submits forms.</p>
+      <button id="cancel-insert" class="text-button" hidden>Cancel insertion</button>
+      <p id="notice" role="status" aria-live="polite" hidden></p>
+    </section>
+
+    <details class="settings-card"><summary>Privacy &amp; recovery</summary>
+      <label class="check-label"><input id="save-draft" type="checkbox"> Keep a local recovery draft for up to 7 days</label>
+      <p class="hint">Off by default. No audio is saved. Drafts stay in this Chrome profile, never Chrome Sync.</p>
+      <button id="delete-draft" class="text-button">Delete saved draft</button>
+      <button id="revoke-sites" class="text-button">Revoke saved website access</button>
+      <p id="retention-note" class="hint">Download your text before closing this panel. Recovery is off.</p>
+      <a href="privacy.html" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://github.com/buzagloidan/ivrit-local" target="_blank" rel="noopener">Source &amp; support</a>
+    </details>
+    <footer><p>Recognition stays on this device. No account. No cloud.</p><details><summary>About this extension</summary><p>Ivrit Local 0.2.0 · Bundled 66M-parameter Hebrew model, INT8. Runs with sherpa-onnx WebAssembly.</p><p>Audio is never saved or uploaded. Transcript recovery is optional and stays in this Chrome profile for up to 7 days.</p><p>English recognition is limited. Please check names and numbers.</p><a href="about.html" target="_blank" rel="noopener">Credits, licenses &amp; privacy</a></details></footer>
+  </main>
+  <script src="transcript-tools.js"></script>
+  <script src="file-player.js"></script>
+  <script src="i18n.js"></script>
+  <script src="microphone-access.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>

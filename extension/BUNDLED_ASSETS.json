@@ -1,0 +1,171 @@
+{
+  "model": "thewh1teagle/zipformer2-66m-streaming-he",
+  "model_revision": "6c07526ebfdfc71d12ed4ce6aaebe32774a2613a",
+  "sherpa_onnx_version": "1.13.7",
+  "assets": {
+    "LICENSE.txt": {
+      "bytes": 1302,
+      "sha256": "15a3ba4cd15e2391cc7759fb7d7c57523b58312f5171c7b1fee784f5d46387aa"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "bytes": 2964,
+      "sha256": "0d1bc14523f49b4829e17eb41bd05fac24231b9ad2107e1cf6095ab667853b41"
+    },
+    "about.html": {
+      "bytes": 3885,
+      "sha256": "a59844beafa0bbd37eb8c63c24430bb35ca799d44ec398349f5cd3c844892d2d"
+    },
+    "audio-worklet.js": {
+      "bytes": 1002,
+      "sha256": "17b969722f38d98d1fc07bc23d891530ee542a7559c42de2305420d7ddb64d72"
+    },
+    "background.js": {
+      "bytes": 2265,
+      "sha256": "afe9a8fe0a7e5649ce33d5bfbd95da7e8e2555e5813f211c1d360642b11e56d0"
+    },
+    "capture-target.js": {
+      "bytes": 10089,
+      "sha256": "42a4e1e819bb5a48f57b5079c6c72575e46526b4be379c175fe6f8f712fe9691"
+    },
+    "demo/SOURCE.json": {
+      "bytes": 608,
+      "sha256": "1795141b5de6caa9b3502f2b67a4df35da5d91542e5cf2a3cb864716c3a5d04d"
+    },
+    "demo/sample-hebrew.wav": {
+      "bytes": 91300,
+      "sha256": "f4906383b0ed8945e0f3d97392e6442d6d64c2014193b8523d9c57a22a231ba9"
+    },
+    "engine-worker.js": {
+      "bytes": 5883,
+      "sha256": "22203f84173651c622e43f1d547a6a2bcba57494929807b5b1189d9a7bf63186"
+    },
+    "file-player.js": {
+      "bytes": 1798,
+      "sha256": "5db0e2eab85913d98d7090e8af6a39553b70a9cd5177c4fe24673e6774f0a0a5"
+    },
+    "i18n.js": {
+      "bytes": 10746,
+      "sha256": "da7fadbb83d57da817967ffe5596b02cd07c55470e02ff5e891f3139e161148d"
+    },
+    "icons/128.png": {
+      "bytes": 3485,
+      "sha256": "3ac34d9173b54ffbc625104bbcf200836bbea19f552d048b705258ed78503c40"
+    },
+    "icons/16.png": {
+      "bytes": 639,
+      "sha256": "60565df303dd51a01770abe9159bb4d100d2d9230a22f122beb83ac39f2cc741"
+    },
+    "icons/48.png": {
+      "bytes": 1299,
+      "sha256": "970f313812fea7c00c1e4ed43156aedd2999d4098d4c6eef09f381e6716a924d"
+    },
+    "manifest.json": {
+      "bytes": 1223,
+      "sha256": "363bd1836b26d05e7d3adddf7d2e1b7be3b16be231a4271fafe53b3e5d3c889d"
+    },
+    "microphone-access.js": {
+      "bytes": 2380,
+      "sha256": "af771e15c9e25613376f9bb3d4780898e3de75851acab3f67f1c69e1fdc2b22a"
+    },
+    "microphone.css": {
+      "bytes": 1869,
+      "sha256": "6d88872dabb8fd3be0c3b8a91eeb0c5672e50f2cb63bbdbcadf593c464b5d005"
+    },
+    "microphone.html": {
+      "bytes": 2118,
+      "sha256": "7c8e26a8639e7a56243d0928328fd67d5b07a278ac37a2f758c5439675c9fd89"
+    },
+    "microphone.js": {
+      "bytes": 5002,
+      "sha256": "7090e3519f789d2b4296399307dafb08248b7db5bf82f752febd3aaf58602ad9"
+    },
+    "model/CC-BY-4.0.txt": {
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    "model/README.upstream.md": {
+      "bytes": 5003,
+      "sha256": "22682db4469f60a4da510fc6ee552696890f8dc8ef11c8b408df6f2813a8a9fa"
+    },
+    "model/decoder.int8.onnx": {
+      "bytes": 1049105,
+      "sha256": "feb03e7c8aa761593a9284a6fa1e91259be3702de75f630062256c1a59c5a906"
+    },
+    "model/encoder.int8.onnx": {
+      "bytes": 70478964,
+      "sha256": "6c6febcb74a09435315a1d872a6539f6e7fc2c333533f14c74edc0e85c49ffcd"
+    },
+    "model/joiner.int8.onnx": {
+      "bytes": 771805,
+      "sha256": "1d2c6d8e6dabc5eb52de52e95718e9bdfbffbfe7ead3808fb5ffd74e83bd9cae"
+    },
+    "model/tokens.txt": {
+      "bytes": 17086,
+      "sha256": "e4ebb5e72a6aeef47437a55fa2308ebbedb7c51c557de7a89bf965c23ea9af4a"
+    },
+    "panel.css": {
+      "bytes": 8059,
+      "sha256": "2046fe679c75701942d17cfb3a08c4730453dd1ae0a076515e6a91addb3d5b8e"
+    },
+    "panel.html": {
+      "bytes": 6676,
+      "sha256": "0ca4dd864d8ad70bf8932fceb7ae5ce4f282deb0b8caf1264a9dc9f5887fc4c1"
+    },
+    "panel.js": {
+      "bytes": 30499,
+      "sha256": "bd4d66e4c6848c6a3760b1888d2aac64eb9943b9daee127896efd3be34baa61f"
+    },
+    "privacy.html": {
+      "bytes": 6300,
+      "sha256": "f99f4c5707664ee05d057e200dc81ef21e19b181c6880d94a699a2d7fce8b76d"
+    },
+    "transcript-tools.js": {
+      "bytes": 2526,
+      "sha256": "7a05d470819541cb0aa181cfb482a6b880e868604771b9326e6f43bd913a34a0"
+    },
+    "vendor/EMSCRIPTEN-LICENSE.txt": {
+      "bytes": 5093,
+      "sha256": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86"
+    },
+    "vendor/KALDI-DECODER-LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "vendor/KALDI-NATIVE-FBANK-LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "vendor/KISSFFT-BSD-3-CLAUSE.txt": {
+      "bytes": 1830,
+      "sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed"
+    },
+    "vendor/KISSFFT-LICENSE.txt": {
+      "bytes": 246,
+      "sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6"
+    },
+    "vendor/ONNX-RUNTIME-LICENSE.txt": {
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    "vendor/ONNX-RUNTIME-THIRD-PARTY-NOTICES.txt": {
+      "bytes": 325054,
+      "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2"
+    },
+    "vendor/SHERPA-LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "vendor/sherpa-onnx-asr.js": {
+      "bytes": 53867,
+      "sha256": "d51ae8e8b756ee5e53423ffada0c9702973f154f561aca7984fe0b12f4060178"
+    },
+    "vendor/sherpa-onnx-wasm-main-asr.js": {
+      "bytes": 78734,
+      "sha256": "02415317df6cf26d9c88b601554b3b19623c06699dec6973347c6febce2d12ba"
+    },
+    "vendor/sherpa-onnx-wasm-main-asr.wasm": {
+      "bytes": 13150239,
+      "sha256": "d0c15c3042fd61ca2a158a1eeb8b8c2099201f7580945efc8f729d2830cf746d"
+    }
+  }
+}

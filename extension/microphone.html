@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enable microphone — Ivrit Local</title>
+  <link rel="stylesheet" href="panel.css"><link rel="stylesheet" href="microphone.css">
+</head>
+<body>
+  <main class="permission-page">
+    <header class="brand"><div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><div><h1>Ivrit <span>Local</span></h1><p>Your voice. Your device.</p></div></header>
+    <section class="permission-card" id="permission-card" data-state="intro" aria-labelledby="permission-title">
+      <div class="permission-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3M9 21h6"></path></svg></div>
+      <span class="eyebrow" id="permission-step">ONE QUICK PERMISSION</span>
+      <h2 id="permission-title">Let’s enable your microphone</h2>
+      <p id="message" role="status" aria-live="polite">Choose Enable microphone, then Allow in Chrome’s permission prompt.</p>
+      <p id="resume-hint" class="resume-hint" hidden>After you allow access, this window closes and recording starts in your side panel.</p>
+      <button id="enable" class="primary">Enable microphone</button>
+      <button id="settings" class="button permission-settings" hidden>Open Chrome microphone settings <span aria-hidden="true">↗</span></button>
+      <button id="return" class="primary" hidden>Return to recorder</button>
+      <details id="system-help" hidden><summary>Check your computer’s microphone settings</summary><p id="system-instructions"></p><p>If your computer asks you to restart Chrome, save your work first.</p></details>
+    </section>
+    <div class="privacy permission-privacy"><span class="dot"></span> Audio stays on this device. No cloud.</div>
+    <button id="cancel" class="text-button muted permission-cancel">Cancel setup</button>
+  </main>
+  <script src="microphone-access.js"></script><script src="microphone.js"></script>
+</body>
+</html>

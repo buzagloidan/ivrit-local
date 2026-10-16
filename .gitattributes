@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.png binary
+*.wav binary
+*.onnx binary
+*.wasm binary
+# Preserve verbatim upstream license formatting.
+extension/vendor/*.txt -whitespace
+extension/model/CC-BY-4.0.txt -whitespace
