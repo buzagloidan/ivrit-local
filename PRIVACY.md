@@ -30,7 +30,7 @@ or closing the panel releases capture. The browser/operating system independentl
 its media buffers; the extension does not claim secure erasure of physical memory.
 
 Transcript recovery is **off by default**. Without recovery, transcripts and timestamps are
-held in the open panel and disappear when it closes. Use Download TXT/SRT/VTT to keep a file.
+held in the open panel and disappear when it closes. Use Download TXT to keep a file.
 Files you export and your clipboard are managed by your computer, not by this extension.
 
 If you enable recovery, one transcript and its caption timing are stored locally in this

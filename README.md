@@ -5,7 +5,7 @@ and audio-file transcription run on your device using a bundled 66M-parameter Zi
 model and sherpa-onnx WebAssembly. No account, API key, backend, analytics or model download
 after installation.
 
-**0.2.1 beta:** security-hardened development release. Not submitted to or approved by the
+**0.2.2 beta:** security-hardened development release. Not submitted to or approved by the
 Chrome Web Store. Actual macOS/Windows Chrome acceptance gates are tracked in
 [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md); previews and unit tests do not replace them.
 
@@ -30,9 +30,7 @@ Alternatively build from source below. The installed extension never needs Pytho
 - **Audio file:** choose a supported WAV/MP3/M4A/etc. file up to **64 MB and 60 minutes**.
   Files are streamed at playback speed, silently, to avoid full-file PCM allocations. You can
   stop at any time. This prioritizes bounded memory over the old full-buffer fast import path.
-- **Try a sample:** a short CC0 Hebrew greeting is included and works offline.
-- Edit or Copy the transcript, download TXT, or export recognizer-timed SRT/VTT. Editing text
-  invalidates caption timing. Review timing, names and numbers before publishing.
+- Edit or Copy the transcript, or download it as a TXT file. Review names and numbers.
 - **Insert:** uses Chrome's temporary active-tab access first. If unavailable, explicitly allow
   a named site or opt into all websites. Then click a visible editable field, or focus one and
   press Enter. It never submits forms, inserts executable HTML, or accepts scripted clicks.
@@ -77,7 +75,7 @@ npm run test:wasm
 python3 scripts/package.py
 ```
 
-Use `extension/` with Load unpacked, or extract `dist/ivrit-local-0.2.1.zip`. Large model/WASM
+Use `extension/` with Load unpacked, or extract `dist/ivrit-local-0.2.2.zip`. Large model/WASM
 assets are excluded from Git and fetched from pinned official sources; SHA-256 verification
 is mandatory. `assets-lock.json` records exact URLs/digests. The final ZIP includes everything,
 so users do not fetch a model on first use. `extension/BUNDLED_ASSETS.json` inventories each build.

@@ -1,5 +1,5 @@
 const $ = (id) => document.getElementById(id);
-const ui = Object.fromEntries(['record','record-label','upload','sample','file','clear','copy','insert','transcript','status','status-label','timer','notice','word-count','metrics','level','progress','grant-mic','cancel-setup','transcript-hint','cancel-insert','audio-source','source-hint','record-mic-icon','download-txt','download-srt','download-vtt','undo-insert','insertion-access','insertion-site','insertion-all-sites','enable-insertion','save-draft','delete-draft','revoke-sites','retention-note'].map((id) => [id, $(id)]));
+const ui = Object.fromEntries(['record','record-label','upload','file','clear','copy','insert','transcript','status','status-label','timer','notice','word-count','metrics','level','progress','grant-mic','cancel-setup','transcript-hint','cancel-insert','audio-source','source-hint','record-mic-icon','download-txt','undo-insert','insertion-access','insertion-site','insertion-all-sites','enable-insertion','save-draft','delete-draft','revoke-sites','retention-note'].map((id) => [id, $(id)]));
 const inExtension = Boolean(globalThis.chrome?.runtime?.id);
 let worker, ready = false, fatal = false, phase = 'loading', activeJob = 0, sequence = 0;
 let prefix = '', media, context, source, capture, silent, timerInterval, flushed;
@@ -29,7 +29,7 @@ function setPhase(next, message) {
   ui['record-label'].textContent = ({ loading: 'Loading model…', idle: audioSource() === 'tab' ? 'Choose tab & transcribe' : inExtension && microphoneState !== 'granted' ? 'Enable microphone' : 'Start recording', permission: 'Waiting for permission…', starting: audioSource() === 'tab' ? 'Opening tab audio…' : 'Opening microphone…', recording: 'Stop recording', finishing: 'Finishing…', file: 'Stop transcription', error: 'Reload speech engine' })[next];
   ui.record.disabled = !((ready && ['idle', 'recording', 'file'].includes(next)) || (fatal && next === 'error'));
   const idle = ready && next === 'idle';
-  ui.upload.disabled = ui.sample.disabled = !idle;
+  ui.upload.disabled = !idle;
   ui['audio-source'].disabled = !idle;
   ui['record-mic-icon'].hidden = audioSource() === 'tab' || next === 'file';
   ui.transcript.readOnly = !['idle', 'error'].includes(next);
@@ -49,7 +49,6 @@ function updateOutput() {
   ui.insert.disabled = !text || !editable || !inExtension || Boolean(insertion);
   ui.clear.disabled = !text || !editable;
   ui['download-txt'].disabled = !text;
-  ui['download-srt'].disabled = ui['download-vtt'].disabled = !cues.length || !editable;
   scheduleDraft();
   IvritI18n.apply();
 }
@@ -357,15 +356,6 @@ ui.upload.addEventListener('click', () => ui.file.click());
 ui['grant-mic'].addEventListener('click', () => openMicrophoneSetup());
 ui['cancel-setup'].addEventListener('click', () => cancelMicrophoneSetup());
 ui.file.addEventListener('change', () => { const file = ui.file.files[0]; ui.file.value = ''; if (file) transcribeFile(file); });
-ui.sample.addEventListener('click', async () => {
-  if (phase !== 'idle') return;
-  setPhase('file', 'Opening the bundled Hebrew sample…');
-  try {
-    const response = await fetch('demo/sample-hebrew.wav');
-    if (!response.ok) throw new Error('The sample file is missing.');
-    await transcribeFile(new File([await response.blob()], 'Hebrew sample.wav', { type: 'audio/wav' }));
-  } catch (error) { fail(error.message); }
-});
 ui.transcript.addEventListener('input', () => { cues = []; ui.transcript.value = ui.transcript.value.slice(0, limits.MAX_TEXT); cancelInsertion('Transcript changed. Click Insert when you are ready.'); updateOutput(); });
 ui.clear.addEventListener('click', () => { cancelInsertion(); ui.transcript.value = ''; cues = []; ui.metrics.textContent = ''; ui.timer.textContent = '00:00'; notice(''); updateOutput(); });
 ui.copy.addEventListener('click', async () => {
@@ -464,7 +454,6 @@ function download(content,type,extension) {
   setTimeout(()=>URL.revokeObjectURL(url),60000);
 }
 ui['download-txt'].addEventListener('click',()=>download(ui.transcript.value,'text/plain;charset=utf-8','txt'));
-for(const format of ['srt','vtt'])ui[`download-${format}`].addEventListener('click',()=>download(limits.captions(cues,format),format==='vtt'?'text/vtt;charset=utf-8':'text/plain;charset=utf-8',format));
 function persistDraft(){clearTimeout(draftTimer);try{limits.saveDraft(localStorage,ui.transcript.value,cues);}catch{notice('Local recovery could not be saved. Download your transcript.',true);}}
 function scheduleDraft(){clearTimeout(draftTimer);draftTimer=setTimeout(persistDraft,500);}
 ui['save-draft'].addEventListener('change',()=>{

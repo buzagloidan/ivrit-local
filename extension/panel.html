@@ -30,7 +30,7 @@
       <meter id="level" min="0" max="1" value="0" aria-label="עוצמת השמע הנכנס" hidden></meter>
       <progress id="progress" max="1" value="0" aria-label="התקדמות התמלול" hidden></progress>
       <button id="record" class="primary" disabled><span id="record-mic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3M9 21h6"></path></svg></span><span id="record-label">טוענים מודל…</span></button>
-      <div class="secondary-actions"><button id="upload" class="text-button" disabled>בחירת קובץ שמע</button><span>·</span><button id="sample" class="text-button" disabled>ניסיון עם דוגמה</button></div>
+      <div class="secondary-actions"><button id="upload" class="text-button" disabled>בחירת קובץ שמע</button></div>
       <div class="permission-actions"><button id="grant-mic" class="text-button" hidden>הגדרת הרשאת מיקרופון</button><button id="cancel-setup" class="text-button" hidden>ביטול הגדרת מיקרופון</button></div>
       <input id="file" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.webm,.flac" hidden>
     </section>
@@ -40,8 +40,7 @@
       <textarea id="transcript" dir="rtl" lang="he" spellcheck="false" placeholder="הטקסט שלך יופיע כאן…" aria-describedby="transcript-hint"></textarea>
       <div class="transcript-meta"><span id="word-count">0 מילים</span><span id="metrics"></span></div>
       <div class="output-actions"><button id="copy" class="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg>העתקת טקסט</button><button id="insert" class="button insert" disabled>הוספה לדף <span aria-hidden="true">↗</span></button></div>
-      <div class="export-actions"><button id="download-txt" class="text-button" disabled>הורדת טקסט</button><button id="download-srt" class="text-button" disabled>הורדת SRT</button><button id="download-vtt" class="text-button" disabled>הורדת VTT</button><button id="undo-insert" class="text-button" hidden>ביטול ההוספה</button></div>
-      <p class="hint" id="captions-hint">תזמון הכתוביות מבוסס על הזיהוי. בדקו לפני פרסום; עריכת התמלול מוחקת את התזמון.</p>
+      <div class="export-actions"><button id="download-txt" class="text-button" disabled>הורדת טקסט</button><button id="undo-insert" class="text-button" hidden>ביטול ההוספה</button></div>
       <div id="insertion-access" class="settings-card" hidden>
         <p>נדרשת הרשאה לאתר היעד. אפשר לאשר אתר אחד, או לבחור במפורש בכל האתרים.</p>
         <label for="insertion-site">כתובת האתר</label><input id="insertion-site" type="url" placeholder="https://example.com" autocomplete="off" spellcheck="false">
@@ -61,7 +60,7 @@
       <p id="retention-note" class="hint">הורידו את הטקסט לפני סגירת החלונית. השחזור כבוי.</p>
       <a href="privacy.html" target="_blank" rel="noopener">מדיניות פרטיות</a> · <a href="https://github.com/buzagloidan/ivrit-local" target="_blank" rel="noopener">קוד מקור ותמיכה</a>
     </details>
-    <footer><p>הזיהוי נשאר במכשיר. ללא חשבון וללא ענן.</p><details><summary>על התוסף</summary><p>Ivrit Local 0.2.1 · מודל עברי מצורף עם 66 מיליון פרמטרים, INT8. פועל באמצעות sherpa-onnx WebAssembly.</p><p>שמע אינו נשמר או מועלה. שחזור תמלול הוא אופציונלי ומקומי, עד 7 ימים.</p><p>הזיהוי באנגלית מוגבל. בדקו שמות ומספרים.</p><a href="about.html" target="_blank" rel="noopener">קרדיטים, רישיונות ופרטיות</a></details></footer>
+    <footer><p>הזיהוי נשאר במכשיר. ללא חשבון וללא ענן.</p><details><summary>על התוסף</summary><p>Ivrit Local 0.2.2 · מודל עברי מצורף עם 66 מיליון פרמטרים, INT8. פועל באמצעות sherpa-onnx WebAssembly.</p><p>שמע אינו נשמר או מועלה. שחזור תמלול הוא אופציונלי ומקומי, עד 7 ימים.</p><p>הזיהוי באנגלית מוגבל. בדקו שמות ומספרים.</p><a href="about.html" target="_blank" rel="noopener">קרדיטים, רישיונות ופרטיות</a></details></footer>
   </main>
   <script src="transcript-tools.js"></script>
   <script src="file-player.js"></script>

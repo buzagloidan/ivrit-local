@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Ivrit Local — תמלול בעברית",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "תמלול פרטי בעברית. מודל זיהוי הדיבור כלול בתוסף ופועל במכשיר שלכם, גם ללא אינטרנט.",
   "minimum_chrome_version": "116",
   "permissions": [
