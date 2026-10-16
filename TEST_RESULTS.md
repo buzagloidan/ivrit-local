@@ -61,4 +61,5 @@ The installed extension reload/service-worker/side-panel flow, native microphone
 actual Windows Chrome, physical-microphone/speaker conditions, screen readers, low-memory devices,
 and Chrome Web Store publisher 2FA remain manual acceptance gates in docs/ACCEPTANCE.md.
 CI unit checks on Windows are useful but do not constitute native Windows capture testing.
+Browser download observation stalled, so native TXT/SRT/VTT download completion remains a manual check; generated caption content and formatting passed module tests.
 The extension has not been submitted to the Chrome Web Store.

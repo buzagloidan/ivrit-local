@@ -4,8 +4,8 @@
   "sherpa_onnx_version": "1.13.7",
   "assets": {
     "LICENSE.txt": {
-      "bytes": 1302,
-      "sha256": "15a3ba4cd15e2391cc7759fb7d7c57523b58312f5171c7b1fee784f5d46387aa"
+      "bytes": 1086,
+      "sha256": "b3514dbf9b51ebda5b991cb5c3aeb92e451ea2fa299a0fcb480f14e1849929af"
     },
     "THIRD_PARTY_NOTICES.md": {
       "bytes": 2964,
