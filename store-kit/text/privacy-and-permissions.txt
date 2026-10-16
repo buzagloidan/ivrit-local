@@ -1,0 +1,26 @@
+Ivrit Local — Chrome Web Store Privacy practices preparation
+
+Single purpose:
+On-device Hebrew speech-to-text from the microphone, an explicitly shared browser tab, or a user-selected audio file, with user-directed editing, copying, TXT export, insertion and optional local draft recovery.
+
+Permission justifications:
+sidePanel: Hosts the recorder and transcript alongside the current page.
+activeTab: Uses the temporary current-tab grant when the user invokes the extension, so text insertion can work without a persistent site grant.
+scripting: Injects a field-placement guide on the chosen tab only when the user chooses Insert. It places text after a genuine destination action; it does not automatically scan pages.
+clipboardWrite: Copies transcript text only when the user chooses Copy text.
+Optional HTTP/HTTPS host access: If temporary access is unavailable, the user may allow a specific site to insert text. All-site access requires a separate explicit opt-in. Website access can be revoked in the panel. No browsing-history collection or background page scanning occurs.
+
+Microphone/browser-tab capture:
+Access is requested through browser media prompts; no tabCapture, desktopCapture, or microphone manifest permission is claimed. Tab mode requests audio with getDisplayMedia; Chrome supplies a video track, which is disabled and whose frames are never read/recorded/uploaded. Only audio is sent to the local recognizer.
+
+Remote code:
+No remote code. All JavaScript, WebAssembly and model weights are included in the installation ZIP. CSP restricts connections to the extension origin; selected local files use blob media URLs. No CDN, API server, analytics or model download is used at runtime.
+
+Data handling disclosure:
+Audio, recognized text, approximate recognizer timing and the user-selected insertion field are handled locally. We receive none of them. Audio is held in memory, not saved by the extension. Draft recovery is opt-in and stores one transcript/timing draft in this local Chrome profile with a seven-day expiry, never Chrome Sync. Exported files and clipboard text are handled by the OS; inserted text can be read or transmitted by the destination website. No sale, advertising use, unrelated profiling or model training is performed.
+
+Dashboard data-category checkboxes:
+Read the exact current dashboard wording. The facts above explain local handling and the absence of developer/server collection; do not equate local speech processing with an absence of all data handling. No dashboard categories or legal certifications have been checked on the publisher’s behalf. The publisher must confirm the final declarations match both this package and the public policy.
+
+Public policy:
+https://github.com/buzagloidan/ivrit-local/blob/main/PRIVACY.md

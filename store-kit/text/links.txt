@@ -1,0 +1,4 @@
+Homepage: https://github.com/buzagloidan/ivrit-local
+Support: https://github.com/buzagloidan/ivrit-local/issues
+Privacy: https://github.com/buzagloidan/ivrit-local/blob/main/PRIVACY.md
+Security: https://github.com/buzagloidan/ivrit-local/security/advisories/new

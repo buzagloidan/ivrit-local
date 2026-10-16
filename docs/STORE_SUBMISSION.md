@@ -61,3 +61,15 @@ Official references checked on 16 October 2026:
 - https://developer.chrome.com/docs/webstore/publish
 - https://developer.chrome.com/docs/webstore/images
 - https://developer.chrome.com/docs/webstore/cws-dashboard-privacy
+
+## Prepared store kit
+
+`store-kit/` contains Hebrew listing fields, English reviewer/privacy/permission copy,
+two 1280×800 screenshots of the actual local preview in a marketing frame, a 440×280
+promotional tile, an optional 1400×560 banner, and a padded 128×128 PNG store icon.
+The screenshots do not certify installed-extension behavior; provenance and outstanding
+acceptance checks are documented in `store-kit/README.md`.
+
+Build the full handoff archive with `python3 scripts/package_store_kit.py` after
+`python3 scripts/package.py`. The output includes the existing extension ZIP under `package/`.
+Upload that nested package as the extension, not the whole store-kit archive.

@@ -1,0 +1,14 @@
+Ivrit Local 0.2.2 — reviewer instructions
+
+No login, credentials, API key, external server, or post-install model download is required. The UI is Hebrew only. Use desktop Chrome 116 or newer.
+
+1. Click the toolbar action to open the side panel. Wait for the bundled Hebrew model to load.
+2. Microphone: keep מקור שמע (Audio source) set to מיקרופון (Microphone), choose הפעלת מיקרופון (Enable microphone), and Allow in Chrome’s permission dialog. Speak a short Hebrew sentence and choose עצירת הקלטה (Stop recording). Denying/cancelling must leave file import available.
+3. File: choose בחירת קובץ שמע (Choose an audio file) and select non-sensitive Hebrew audio. Imports are processed silently at playback speed. Files are limited to 64 MB and 60 minutes. The included CC0 test recording is demo/sample-hebrew.wav inside the extension package, even though no sample button is shown.
+4. Verify Hebrew text in תמלול (Transcript). Edit it, choose העתקת טקסט (Copy text), or הורדת טקסט (Download text/TXT). Subtitle export is not part of this UI.
+5. Tab audio: choose שמע מלשונית (Browser tab audio), then בחירת לשונית ותמלול. Select a Chrome tab playing public Hebrew audio and enable Share tab audio. Microphone access is not used for this mode. Stop recording or Stop sharing finishes recognition and releases capture.
+6. In a normal HTTPS page with a visible editable field, choose הוספה לדף (Insert into page), then click that field. If needed, explicitly allow just that site. The extension does not submit forms or insert into passwords. Choose ביטול ההוספה (Undo insertion) before making subsequent edits. Complex editors may need Copy instead.
+7. Open פרטיות ושחזור (Privacy & recovery). Draft recovery is off by default; enabling it stores one local draft for up to seven days. Delete/disable controls and site-access revocation are available here. No Chrome Sync is used.
+8. After installation, disconnect the network and repeat microphone or local-file recognition. No remote recognition requests or telemetry should be made. External GitHub/privacy links only open at the user’s request.
+
+Limitations: Hebrew recognition can misrecognize names, numbers and noisy speech. English recognition is limited. Session limit: 60 minutes; transcript: 200,000 characters. WASM reserves a 512 MiB heap; actual performance depends on the device.
