@@ -1,4 +1,9 @@
-# Chrome Web Store submission worksheet
+# Chrome Web Store submission worksheet — 0.2.2
+
+Copy-ready Hebrew listing: [STORE_LISTING_HE.md](STORE_LISTING_HE.md).
+
+Status: not submitted. Browser automation cannot script the Chrome extensions gallery,
+including the current developer dashboard. Upload and final submission require the maintainer.
 
 Single purpose: On-device Hebrew speech transcription from a microphone, explicitly shared
 browser tab, or user-selected audio file, with user-directed export/recovery/insertion.
@@ -28,13 +33,31 @@ The manifest permits only self-origin connections and local blob media, with bun
 ## Reviewer instructions
 
 1. Open the side panel from the toolbar. Wait for the packaged model to load.
-2. Choose Try a sample: a CC0 recording of “שלום” is processed locally.
-3. Download TXT/SRT/VTT. No login, API key, model download or server is required.
+2. Choose an audio file, or enable microphone access and speak a short Hebrew sentence.
+3. Download TXT. No login, API key, model download or server is required.
 4. Select Browser tab audio; share a public Hebrew audio/video tab with audio enabled.
 5. On a normal test webpage, choose Insert and click a visible text field. Exercise Undo.
 6. Check Privacy & recovery and the public policy. Recovery is off by default.
-7. Repeat sample recognition with the network disabled after installation.
+7. Repeat microphone or file recognition with the network disabled after installation.
 
 Do not submit until docs/ACCEPTANCE.md is completed for the release candidate. Supply accurate
 store images from the final installed extension, language/quality limits, developer contact,
 and verified publisher account information. The current package is a beta, not store-approved.
+
+## Graphic assets and dashboard handoff
+
+The store requires a 128×128 icon, a screenshot, and a 440×280 small promotional image.
+Prepare a 1280×800 screenshot of the current UI. A promotional video and marquee image
+are optional. Any preview capture must be identified as such in the preparation notes;
+it does not establish installed-extension acceptance. Do not use screenshots of the older
+interface with subtitle export, the sample button, or the language selector.
+
+For the remote-code question, select No: model files, JS, and WASM are bundled. Describe
+local audio/text processing and optional recovery even though nothing is sent to us.
+The dashboard’s actual data-category labels and certifications must be reviewed there;
+this worksheet does not certify unspecified checkboxes or agree to legal terms for you.
+
+Official references checked on 16 October 2026:
+- https://developer.chrome.com/docs/webstore/publish
+- https://developer.chrome.com/docs/webstore/images
+- https://developer.chrome.com/docs/webstore/cws-dashboard-privacy

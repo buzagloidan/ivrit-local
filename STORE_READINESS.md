@@ -1,4 +1,4 @@
-# Store readiness — 0.2.0 beta
+# Store readiness — 0.2.2 beta
 
 The initial 0.1.4 review led to the changes below. Source changes are implemented; remaining
 manual acceptance gates must be completed before store submission. See TEST_RESULTS.md.
@@ -11,7 +11,7 @@ manual acceptance gates must be completed before store submission. See TEST_RESU
 | Apple demo redistribution | Replaced with CC0 YaronSh/Lingua Libre greeting; provenance and original checksum bundled. |
 | Resource exhaustion | Incremental media playback replaces whole-file decode. 64 MB/60-minute imports, 60-minute sessions, 200k text cap, backpressure and endpoint segmentation. |
 | Lost work | TXT export, opt-in seven-day local draft, delete/disable controls, visible retention warning. |
-| Undo, captions, Hebrew UI | Implemented conservative Undo, recognizer-timed SRT/VTT and Hebrew RTL interface. Edited transcripts invalidate caption exports. |
+| Undo and Hebrew UI | Conservative Undo and Hebrew-only RTL interface. Subtitle download and sample controls were removed in 0.2.2. |
 | Long-session reliability | 30-minute synthetic-audio endurance passed with bounded observed memory and no new-session leakage. |
 | Supply chain / open source | MIT code; separate model/runtime/demo licenses; pinned verified asset bootstrap; release allowlist; CI and dependency inventory. |
 | Native Chrome / device matrix | Production pipeline tested in desktop Chrome preview, but installed-extension permission/side-panel integration and actual Windows/low-memory hardware still require manual checks. |
