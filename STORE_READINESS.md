@@ -1,6 +1,7 @@
-# Store readiness — 0.2.2 beta
+# Published store listing / next candidate 0.2.3
 
-The initial 0.1.4 review led to the changes below. Source changes are implemented; remaining
+The maintainer reports the store listing published on 18 October 2026. The keyboard shortcut update
+is a new 0.2.3 candidate, not submitted by this agent. The initial 0.1.4 review led to the changes below. Source changes are implemented; remaining
 manual acceptance gates must be completed before store submission. See TEST_RESULTS.md.
 
 | Concern | Resolution/status |

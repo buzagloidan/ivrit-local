@@ -5,13 +5,16 @@ and audio-file transcription run on your device using a bundled 66M-parameter Zi
 model and sherpa-onnx WebAssembly. No account, API key, backend, analytics or model download
 after installation.
 
-**0.2.2 beta:** security-hardened development release. Not submitted to or approved by the
-Chrome Web Store. Actual macOS/Windows Chrome acceptance gates are tracked in
-[docs/ACCEPTANCE.md](docs/ACCEPTANCE.md); previews and unit tests do not replace them.
+**Published store listing.** [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/ivrit-local-%E2%80%94-%D7%AA%D7%9E%D7%9C%D7%95%D7%9C-%D7%91%D7%A2%D7%91%D7%A8%D7%99/epkbbbkfomdengkbpchngajaeaelaefp).
+The maintainer reported publication on 18 October 2026. **Next release candidate: 0.2.3**,
+with a microphone keyboard shortcut, pending Store submission and native shortcut acceptance.
+Device checks are tracked in [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md); Store approval,
+previews and unit tests do not replace device testing.
 
 ## Install
 
-Download the self-contained extension ZIP from [Releases](https://github.com/buzagloidan/ivrit-local/releases),
+For normal use, [install from the Chrome Web Store](https://chromewebstore.google.com/detail/ivrit-local-%E2%80%94-%D7%AA%D7%9E%D7%9C%D7%95%D7%9C-%D7%91%D7%A2%D7%91%D7%A8%D7%99/epkbbbkfomdengkbpchngajaeaelaefp).
+For development/candidate testing, download the self-contained extension ZIP from [Releases](https://github.com/buzagloidan/ivrit-local/releases),
 extract it, open `chrome://extensions`, enable Developer mode and choose **Load unpacked**.
 Select the extracted directory containing `manifest.json`. Existing installations can reload
 from that page after replacing their extracted files.
@@ -44,7 +47,13 @@ Alternatively build from source below. The installed extension never needs Pytho
   the old blanket-access build removes that old grant once; new all-site access is explicit.
 
 Chrome-owned pages, local files, protected content and complex editors may limit capture or
-insertion. The current shortcut is Cmd+Shift+Y / Ctrl+Shift+Y; configure conflicts at
+insertion. Open the panel with Cmd+Shift+Y / Ctrl+Shift+Y. In the 0.2.3 candidate,
+Cmd+Shift+Space / Ctrl+Shift+Space starts microphone recording and a second press stops
+live capture or cancels pending microphone setup. It opens the panel and uses the normal
+permission flow. It selects the microphone when idle; tab sharing still uses the record button
+and Chrome’s picker. Commands are scoped to Chrome and are toggles, not hold-to-talk.
+Fn alone is not a supported Chrome command. The Hebrew keyboard settings section shows
+the registered binding or a missing-binding explanation. Configure conflicts at
 `chrome://extensions/shortcuts`. Capturing other people's audio requires appropriate permission.
 
 ## Privacy and security
@@ -75,7 +84,7 @@ npm run test:wasm
 python3 scripts/package.py
 ```
 
-Use `extension/` with Load unpacked, or extract `dist/ivrit-local-0.2.2.zip`. Large model/WASM
+Use `extension/` with Load unpacked, or extract `dist/ivrit-local-0.2.3.zip`. Large model/WASM
 assets are excluded from Git and fetched from pinned official sources; SHA-256 verification
 is mandatory. `assets-lock.json` records exact URLs/digests. The final ZIP includes everything,
 so users do not fetch a model on first use. `extension/BUNDLED_ASSETS.json` inventories each build.

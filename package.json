@@ -1,11 +1,11 @@
 {
   "name":"ivrit-local",
-  "version":"0.2.2",
+  "version":"0.2.3",
   "private":true,
   "description":"Offline Hebrew speech recognition Chrome extension",
   "license":"MIT",
   "scripts":{
-    "test":"node tests/microphone-flow.cjs && node tests/tab-audio-flow.cjs && node tests/insertion-flow.cjs && node tests/release-features.cjs",
+    "test":"node tests/microphone-flow.cjs && node tests/tab-audio-flow.cjs && node tests/insertion-flow.cjs && node tests/release-features.cjs && node tests/shortcut-flow.cjs",
     "test:wasm":"node tests/wasm-smoke.cjs",
     "test:endurance":"node tests/endurance.cjs",
     "assets":"python3 scripts/fetch_assets.py",

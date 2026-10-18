@@ -12,6 +12,7 @@ let filePlayer = null, fileAbort = null, filePaused = false;
 const limits = IvritTranscript;
 const t = (text) => globalThis.IvritI18n?.t(text) || text;
 let recordingSource = 'microphone', lastAudioAt = 0, captureEpoch = 0;
+let recorderWindowId = null, panelClosed = false, shortcutClaimPending = false, shortcutClaimAgain = false;
 function audioSource() { return ui['audio-source'].value === 'tab' ? 'tab' : 'microphone'; }
 function listeningMessage() { return recordingSource === 'tab' ? 'Listening to your selected tab in Hebrew. Keep the video playing.' : 'Listening to your microphone in Hebrew. Press Stop when you’re done.'; }
 
@@ -74,6 +75,7 @@ function setupWorker() {
     if (data.type === 'ready') {
       ready = true;
       setPhase('idle', 'Speak Hebrew. Your audio stays right here.');
+      claimMicrophoneShortcut();
     }
     if (data.id && data.id !== activeJob) return;
     if (data.type === 'result') resultText(data.text, data.cues);
@@ -118,8 +120,10 @@ function sendAudio(samples, wait = false) {
 async function requestRecording() {
   if (phase !== 'idle') return;
   if (audioSource() === 'tab') return startRecording(false, 'tab');
+  const epoch = ++captureEpoch;
   setPhase('starting', 'Checking microphone access…');
   microphoneState = await IvritMicrophoneAccess.state();
+  if (epoch !== captureEpoch || panelClosed || document.hidden || phase !== 'starting') return;
   if (inExtension && microphoneState !== 'granted') return openMicrophoneSetup();
   return startRecording();
 }
@@ -441,11 +445,73 @@ if (inExtension) {
     finishInsertion(message.ok ? 'Text inserted. You can keep dictating or copy it elsewhere.' : message.error || 'Insertion cancelled. Your transcript is still here.', Boolean(message.error));
   });
 }
-window.addEventListener('pagehide', () => { persistDraft(); cancelInsertion(); releaseAudio(); worker?.terminate(); });
+window.addEventListener('pagehide', () => { panelClosed = true; cancelQueuedShortcut(); persistDraft(); cancelInsertion(); releaseAudio(); worker?.terminate(); });
 if (!inExtension) {
   ui['transcript-hint'].textContent = 'Browser preview: recording, files, and recognition run locally. Page insertion is available when installed as an extension.';
 }
 setupWorker();
+
+async function toggleMicrophoneShortcut() {
+  if (!ready || panelClosed || document.hidden) return;
+  if (phase === 'recording') return stopRecording();
+  if (['starting', 'permission'].includes(phase)) {
+    cancelMicrophoneSetup(); releaseAudio();
+    setPhase('idle', 'Microphone setup was closed. You can try again or choose an audio file.');
+    return;
+  }
+  if (phase !== 'idle') {
+    notice('המתינו לסיום התמלול או עצרו אותו לפני התחלת הקלטת מיקרופון.');
+    return;
+  }
+  ui['audio-source'].value = 'microphone';
+  ui['source-hint'].textContent = t('Your voice. For YouTube, choose Browser tab audio.');
+  return requestRecording();
+}
+async function claimMicrophoneShortcut() {
+  if (!inExtension || !ready || recorderWindowId === null || panelClosed || document.hidden) return;
+  if (shortcutClaimPending) { shortcutClaimAgain = true; return; }
+  shortcutClaimPending = true;
+  try {
+    const response = await chrome.runtime.sendMessage({ type: 'claim-microphone-shortcut', windowId: recorderWindowId });
+    if (response?.requestId && response.expiresAt > Date.now() && !panelClosed && !document.hidden) {
+      // Release the handoff immediately so a second key press can cancel pending access.
+      toggleMicrophoneShortcut().catch(() => notice('לא ניתן להפעיל את הקלטת המיקרופון. נסו שוב.', true));
+    }
+  } catch { /* A closed/restarting service worker leaves the recorder usable. */ }
+  finally {
+    shortcutClaimPending = false;
+    if (shortcutClaimAgain) { shortcutClaimAgain = false; claimMicrophoneShortcut(); }
+  }
+}
+function cancelQueuedShortcut() {
+  if (inExtension && recorderWindowId !== null) {
+    chrome.runtime.sendMessage({ type: 'cancel-microphone-shortcut', windowId: recorderWindowId }).catch(() => {});
+  }
+}
+async function refreshRecordingShortcut() {
+  try {
+    const commands = await chrome.commands.getAll();
+    const shortcut = commands.find((command) => command.name === 'toggle-microphone')?.shortcut;
+    $('record-shortcut').textContent = shortcut ? `קיצור הקלטה: ${shortcut}` : 'לא הוגדר קיצור הקלטה. אפשר לבחור קיצור בהגדרות Chrome.';
+  } catch { $('record-shortcut').textContent = 'אפשר לבחור קיצור הקלטה בהגדרות Chrome.'; }
+}
+if (inExtension) {
+  chrome.windows.getCurrent().then((current) => {
+    recorderWindowId = current.id;
+    if (panelClosed || document.hidden) cancelQueuedShortcut();
+    else claimMicrophoneShortcut();
+  }).catch(() => {});
+  chrome.runtime.onMessage.addListener((message, sender) => {
+    if (sender.id !== chrome.runtime.id || sender.tab || message.windowId !== recorderWindowId) return;
+    if (message.type === 'ivrit-shortcut-available') claimMicrophoneShortcut();
+    if (message.type === 'ivrit-shortcut-cancelled') notice('בקשת ההקלטה בוטלה.');
+  });
+  refreshRecordingShortcut();
+  window.addEventListener('focus', refreshRecordingShortcut);
+  $('configure-shortcuts').addEventListener('click', () => {
+    chrome.tabs.create({ url: 'chrome://extensions/shortcuts' }).catch(() => notice('פתחו את chrome://extensions/shortcuts כדי לבחור קיצור מקשים.', true));
+  });
+} else $('shortcut-settings').hidden = true;
 
 function download(content,type,extension) {
   const url=URL.createObjectURL(new Blob([content],{type}));
@@ -479,7 +545,8 @@ if(inExtension && chrome.permissions?.getAll){
 }
 
 if(document.addEventListener)document.addEventListener('visibilitychange',()=>{
-  if(!document.hidden)return;
+  if(!document.hidden){claimMicrophoneShortcut();if(inExtension)refreshRecordingShortcut();return;}
+  cancelQueuedShortcut();
   persistDraft();cancelInsertion();
   if(['recording','file'].includes(phase))stopRecording();
   else if(['starting','permission'].includes(phase)){cancelMicrophoneSetup();releaseAudio();setPhase('idle','Capture stopped because the panel was hidden.');}

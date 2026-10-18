@@ -27,3 +27,17 @@ substitute for native extension permission, service-worker and side-panel checks
 
 Automated evidence is in TEST_RESULTS.md. Unchecked items remain release gates, not claims
 that the extension passed or is approved for the Chrome Web Store.
+
+## 0.2.3 shortcut update
+
+- [ ] Fresh install and Store-version upgrade: open panel shortcut still works; microphone command
+      is registered or the UI correctly reports a missing/conflicting binding.
+- [ ] Cmd+Shift+Space on macOS / Ctrl+Shift+Space on Windows opens a closed panel, waits for
+      the model, follows microphone permission setup if needed, starts once and stops on second press.
+- [ ] Repeat while model is loading and while permission/media access is pending: cancellation
+      does not result in delayed recording. Closing/hiding a panel prevents a queued start.
+- [ ] Two Chrome windows: only the requested window handles the command; another extension
+      or page cannot start capture. A shortcut never opens the tab-sharing picker.
+- [ ] Remap/clear the shortcut at chrome://extensions/shortcuts, reopen the panel and verify
+      displayed binding. Check Hebrew/English keyboard layouts and common OS conflicts.
+- [ ] Chrome loses focus: default command does not start capture from other applications.

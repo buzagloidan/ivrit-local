@@ -13,15 +13,15 @@
     },
     "about.html": {
       "bytes": 3696,
-      "sha256": "6f691b8bead76a4e6e04449e97d03839cfa13fafbc643cab1b45f9b9be29aa61"
+      "sha256": "21f56c019582935717128712bb9648d3a6a8baf8c2e5919b6febefe636e97e8c"
     },
     "audio-worklet.js": {
       "bytes": 1002,
       "sha256": "17b969722f38d98d1fc07bc23d891530ee542a7559c42de2305420d7ddb64d72"
     },
     "background.js": {
-      "bytes": 2265,
-      "sha256": "afe9a8fe0a7e5649ce33d5bfbd95da7e8e2555e5813f211c1d360642b11e56d0"
+      "bytes": 4389,
+      "sha256": "e574dfa62d33ffbe5d839fcdf348c668aa4f8761440317bfc0d058cfb1fd66b9"
     },
     "capture-target.js": {
       "bytes": 10152,
@@ -60,8 +60,8 @@
       "sha256": "970f313812fea7c00c1e4ed43156aedd2999d4098d4c6eef09f381e6716a924d"
     },
     "manifest.json": {
-      "bytes": 1302,
-      "sha256": "371f036733a46cd13c88f998bea878235964b4cae39af59af238555df26367be"
+      "bytes": 1529,
+      "sha256": "0106ef0eebaeba4394691e411f909fb9ad216af05c9ec111ebe2c05974820c52"
     },
     "microphone-access.js": {
       "bytes": 2380,
@@ -108,12 +108,12 @@
       "sha256": "6f4958d345fdb7b214ac55dbc0e10678e64f34f8d1b209d0b6160788ae40de78"
     },
     "panel.html": {
-      "bytes": 6652,
-      "sha256": "14b7b271d44727481cb9ab5dfa416647a85e6f67a972dc331512e8f4595b27db"
+      "bytes": 7121,
+      "sha256": "0b9c7427ca3455939def6404cbebb18be343cb39256b18ffb5becc2a1d062ecc"
     },
     "panel.js": {
-      "bytes": 29475,
-      "sha256": "cae502956ed1094da08e5c03923016f062f4d0e2cea3e883b9e7f3e19cb6897b"
+      "bytes": 33184,
+      "sha256": "10c37c0922dc412e74eaed5de9f2e3e1fa13d8bba54129ede4d1f929a13791bc"
     },
     "privacy.html": {
       "bytes": 6269,

@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '../extension');
 const tick = () => new Promise((resolve) => setImmediate(resolve));
 async function drain() { for (let i = 0; i < 8; i++) await tick(); }
-function environment({ page = 'panel', permission = 'prompt', micError, session = '', accepted = true, permissionQueryFails = false, storedLanguage = 'en' } = {}) {
+function environment({ page = 'panel', permission = 'prompt', micError, session = '', accepted = true, permissionQueryFails = false, storedLanguage = 'en', windowId = 10, shortcuts = [{name:'toggle-microphone',shortcut:'Ctrl+Shift+Space'}] } = {}) {
   const elements = new Map();
   const html = fs.readFileSync(path.join(root, `${page}.html`), 'utf8');
   for (const match of html.matchAll(/\bid="([^"]+)"/g)) {
@@ -16,7 +16,7 @@ function environment({ page = 'panel', permission = 'prompt', micError, session 
   }
   for (const id of ['settings','return','system-help','resume-hint','grant-mic','cancel-setup']) if (elements.has(id)) elements.get(id).hidden = true;
   const calls = { windows: [], removed: [], focus: [], tabs: [], messages: [], audio: 0, tracksStopped: 0, workers: [] };
-  const listeners = { messages: [], removed: [] };
+  const listeners = { messages: [], removed: [], document: {}, page: {} };
   const track = { stop() { calls.tracksStopped++; calls.messages.push({ type: 'track-stopped' }); }, addEventListener() {} };
   const audioNode = () => ({ connect(next) { return next; }, disconnect() {}, gain: { value: 1 } });
   class Context {
@@ -31,7 +31,7 @@ function environment({ page = 'panel', permission = 'prompt', micError, session 
     runtime: { id: 'ivrit-test', getURL: (file) => `chrome-extension://ivrit-test/${file}`,
       onMessage: { addListener: (fn) => listeners.messages.push(fn) },
       sendMessage: async (message) => { calls.messages.push(message); return { accepted }; } },
-    windows: { getCurrent: async () => ({ id: page === 'panel' ? 10 : 50 }),
+    windows: { getCurrent: async () => ({ id: page === 'panel' ? windowId : 50 }),
       create: async (options) => { calls.windows.push(options); return { id: 50 }; },
       update: async (id, options) => { calls.focus.push({ id, ...options }); },
       remove: async (id) => { calls.removed.push(id); listeners.removed.forEach((fn) => fn(id)); },
@@ -40,6 +40,7 @@ function environment({ page = 'panel', permission = 'prompt', micError, session 
       remove: async (id) => calls.removed.push(`tab:${id}`),
       create: async (options) => { calls.tabs.push(options); return { id: 99, windowId: options.windowId || 10 }; } },
     sidePanel: { open: async () => {} },
+    commands: { getAll: async () => shortcuts },
   };
   const cache = new Map([['ui-language', storedLanguage]]);
   const globals = {
@@ -47,7 +48,7 @@ function environment({ page = 'panel', permission = 'prompt', micError, session 
     localStorage:{getItem:key=>cache.get(key)||null,setItem:(key,value)=>cache.set(key,value),removeItem:key=>cache.delete(key)},
     console, URL, URLSearchParams, crypto: { randomUUID: () => 'test-session' }, performance,
     setTimeout, clearTimeout, queueMicrotask, setInterval: () => 1, clearInterval() {},
-    document: { documentElement: {}, body: { className: '', classList: { toggle() {}, remove() {} } }, getElementById: (id) => {
+    document: { documentElement: {}, addEventListener: (name, fn) => { listeners.document[name] = fn; }, body: { className: '', classList: { toggle() {}, remove() {} } }, getElementById: (id) => {
       assert(elements.has(id), `Script refers to missing HTML element ${id}`); return elements.get(id);
     } },
     navigator: { platform: 'MacIntel', permissions: { query: async () => {
@@ -60,7 +61,7 @@ function environment({ page = 'panel', permission = 'prompt', micError, session 
     chrome, AudioContext: Context, AudioWorkletNode: Worklet,
     location: { search: session },
     Worker: class { constructor() { this.onmessage = null; calls.workers.push(this); } terminate() {} postMessage() {} },
-    addEventListener() {},
+    addEventListener(name, fn) { listeners.page[name] = fn; },
   };
   globals.window = globals;
   const context = vm.createContext(globals);

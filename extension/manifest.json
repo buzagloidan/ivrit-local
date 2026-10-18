@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Ivrit Local — תמלול בעברית",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "תמלול פרטי בעברית. מודל זיהוי הדיבור כלול בתוסף ופועל במכשיר שלכם, גם ללא אינטרנט.",
   "minimum_chrome_version": "116",
   "permissions": [
@@ -26,6 +26,13 @@
         "mac": "Command+Shift+Y"
       },
       "description": "פתיחת תמלול בעברית"
+    },
+    "toggle-microphone": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "Command+Shift+Space"
+      },
+      "description": "התחלה או עצירה של הקלטת מיקרופון"
     }
   },
   "icons": {

@@ -62,7 +62,8 @@ actual Windows Chrome, physical-microphone/speaker conditions, screen readers, l
 and Chrome Web Store publisher 2FA remain manual acceptance gates in docs/ACCEPTANCE.md.
 CI unit checks on Windows are useful but do not constitute native Windows capture testing.
 Browser download observation stalled, so native TXT/SRT/VTT download completion remains a manual check; generated caption content and formatting passed module tests.
-The extension has not been submitted to the Chrome Web Store.
+The maintainer reported the store listing published on 18 October 2026. This does not mark the
+manual device/permission checks above as completed. Version 0.2.3 is a new candidate.
 
 ## 0.2.1 Hebrew-only interface
 
@@ -70,3 +71,15 @@ The extension has not been submitted to the Chrome Web Store.
 - Added regression coverage for fixed Hebrew/RTL despite a saved English preference, absence of the language selector, Hebrew word counts, and Hebrew microphone success/blocked states.
 - Main recorder and microphone setup HTML are Hebrew/RTL before JavaScript runs. Chrome-owned permission dialogs follow the browser’s own language.
 - This UI-only update does not resolve the manual installed-Chrome acceptance gates documented above.
+
+## 0.2.3 microphone shortcut candidate
+
+- `npm test` passes, including real production panel/background code with mocked Chrome APIs.
+- Covered cold-panel/model loading, one-time intent claims, window isolation, first-use permission
+  setup, repeated-key cancellation, failed panel opening, expired intent, hidden/closed panels,
+  and releasing a late media grant after cancellation.
+- Verified missing shortcut binding feedback and the shortcut-settings button.
+- Existing microphone, tab capture, insertion, drafts, caption helpers and file-import checks passed.
+- Fn alone is unsupported; the command defaults to Cmd+Shift+Space / Ctrl+Shift+Space and
+  is scoped to Chrome. Native registration, focus, keyboard-layout conflicts and Store-upgrade
+  behavior still need installed-Chrome testing. No native keyboard/microphone test is claimed.
